@@ -110,26 +110,16 @@
             transform: translateY(0);
         }
 
-        /* Link hover interaction */
+        /* Mobile optimized link style (no hover needed) */
         .location-link {
             display: inline-flex;
             align-items: center;
             color: #1A2E44;
-            transition: all 0.3s ease;
         }
-        .location-link:hover {
-            color: #D4AF37;
-        }
-        .location-link i {
+        .location-link i.fa-arrow-up-right-from-square {
             font-size: 0.75rem;
             margin-left: 0.5rem;
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: all 0.3s ease;
-        }
-        .location-link:hover i {
-            opacity: 1;
-            transform: translateX(0);
+            color: #D4AF37;
         }
     </style>
 </head>
@@ -150,11 +140,11 @@
     <!-- Navigation Tabs -->
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-gray-100">
         <ul class="flex overflow-x-auto no-scrollbar justify-start md:justify-center px-4 py-4 space-x-8 text-sm font-bold">
-            <li><button onclick="switchTab('info')" id="tab-info" class="tab-btn pb-2 border-b-2 border-hk-gold text-hk-navy whitespace-nowrap transition-colors"><i class="fa-solid fa-plane-departure mr-1"></i> INFO</button></li>
-            <li><button onclick="switchTab('day1')" id="tab-day1" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap transition-colors">DAY 1 <span class="text-xs font-normal ml-1">5/2</span></button></li>
-            <li><button onclick="switchTab('day2')" id="tab-day2" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap transition-colors">DAY 2 <span class="text-xs font-normal ml-1">5/3</span></button></li>
-            <li><button onclick="switchTab('day3')" id="tab-day3" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap transition-colors">DAY 3 <span class="text-xs font-normal ml-1">5/4</span></button></li>
-            <li><button onclick="switchTab('day4')" id="tab-day4" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap transition-colors">DAY 4 <span class="text-xs font-normal ml-1">5/5</span></button></li>
+            <li><button onclick="switchTab('info')" id="tab-info" class="tab-btn pb-2 border-b-2 border-hk-gold text-hk-navy whitespace-nowrap"><i class="fa-solid fa-plane-departure mr-1"></i> INFO</button></li>
+            <li><button onclick="switchTab('day1')" id="tab-day1" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 whitespace-nowrap">DAY 1 <span class="text-xs font-normal ml-1">5/2</span></button></li>
+            <li><button onclick="switchTab('day2')" id="tab-day2" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 whitespace-nowrap">DAY 2 <span class="text-xs font-normal ml-1">5/3</span></button></li>
+            <li><button onclick="switchTab('day3')" id="tab-day3" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 whitespace-nowrap">DAY 3 <span class="text-xs font-normal ml-1">5/4</span></button></li>
+            <li><button onclick="switchTab('day4')" id="tab-day4" class="tab-btn pb-2 border-b-2 border-transparent text-gray-400 whitespace-nowrap">DAY 4 <span class="text-xs font-normal ml-1">5/5</span></button></li>
         </ul>
     </nav>
 
@@ -168,10 +158,10 @@
             </h2>
 
             <!-- Hotels -->
-            <div class="bg-white rounded-[24px] p-6 shadow-lg shadow-gray-200/50 mb-8 border border-gray-100 scroll-animate hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-white rounded-[24px] p-6 shadow-lg shadow-gray-200/50 mb-8 border border-gray-100 scroll-animate">
                 <h3 class="text-xl font-bold text-gray-800 mb-5 border-b border-gray-100 pb-3 flex items-center"><i class="fa-solid fa-hotel text-hk-gold mr-3"></i>宿泊先ホテル</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="bg-hk-light rounded-2xl p-5 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-hk-light rounded-2xl p-5 border border-gray-100">
                         <p class="font-bold text-hk-navy text-lg mb-1">The T Hotel</p>
                         <p class="text-sm text-gray-500 mb-3"><i class="fa-solid fa-location-dot text-hk-accent mr-1"></i>Pok Fu Lam (薄扶林)</p>
                         <div class="flex items-center gap-2">
@@ -179,7 +169,7 @@
                             <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">中村家</span>
                         </div>
                     </div>
-                    <div class="bg-hk-light rounded-2xl p-5 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-hk-light rounded-2xl p-5 border border-gray-100">
                         <p class="font-bold text-hk-navy text-lg mb-1">Gateway Hotel</p>
                         <p class="text-sm text-gray-500 mb-3"><i class="fa-solid fa-location-dot text-hk-accent mr-1"></i>Tsim Sha Tsui (尖沙咀)</p>
                         <div class="flex items-center gap-2">
@@ -190,38 +180,97 @@
                 </div>
             </div>
 
-            <!-- Flights -->
-            <div class="bg-white rounded-[24px] p-6 shadow-lg shadow-gray-200/50 border border-gray-100 scroll-animate hover:shadow-xl transition-shadow duration-300">
+            <!-- Flights (Layout fixed for mobile) -->
+            <div class="bg-white rounded-[24px] p-6 shadow-lg shadow-gray-200/50 border border-gray-100 scroll-animate">
                 <h3 class="text-xl font-bold text-gray-800 mb-5 border-b border-gray-100 pb-3 flex items-center"><i class="fa-solid fa-plane text-hk-gold mr-3"></i>フライト情報</h3>
-                <div class="space-y-5">
+                <div class="space-y-4">
+                    
+                    <!-- 野村家 -->
                     <div class="flex items-start bg-hk-light/50 p-4 rounded-xl border border-gray-50">
-                        <div class="w-16 flex-shrink-0 pt-1"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">野村家</span></div>
-                        <div class="ml-4 text-sm flex-grow space-y-1">
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-arrival w-5 text-gray-400"></i> CA111 (PEK 9:25 → <span class="text-hk-accent font-bold ml-1">13:05着</span>)</p>
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-departure w-5 text-gray-400"></i> CA110 (<span class="font-bold ml-1">17:45発</span> → PEK 21:15)</p>
+                        <div class="w-16 flex-shrink-0 pt-1">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">野村家</span>
+                        </div>
+                        <div class="ml-3 flex-grow space-y-3">
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-arrival mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">CA111</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(PEK 9:25 <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> <span class="text-hk-accent font-bold">13:05着</span>)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-departure mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">CA110</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(<span class="font-bold text-gray-800">17:45発</span> <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> PEK 21:15)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 中村家 -->
                     <div class="flex items-start bg-hk-light/50 p-4 rounded-xl border border-gray-50">
-                        <div class="w-16 flex-shrink-0 pt-1"><span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">中村家</span></div>
-                        <div class="ml-4 text-sm flex-grow space-y-1">
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-arrival w-5 text-gray-400"></i> UO625 (HND 6:35 → <span class="text-hk-accent font-bold ml-1">10:15着</span>)</p>
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-departure w-5 text-gray-400"></i> UO628 (<span class="font-bold ml-1">20:00発</span> → HND 1:20)</p>
+                        <div class="w-16 flex-shrink-0 pt-1">
+                            <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">中村家</span>
+                        </div>
+                        <div class="ml-3 flex-grow space-y-3">
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-arrival mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">UO625</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(HND 6:35 <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> <span class="text-hk-accent font-bold">10:15着</span>)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-departure mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">UO628</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(<span class="font-bold text-gray-800">20:00発</span> <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> HND 1:20)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 山岡家 -->
                     <div class="flex items-start bg-hk-light/50 p-4 rounded-xl border border-gray-50">
-                        <div class="w-16 flex-shrink-0 pt-1"><span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">山岡家</span></div>
-                        <div class="ml-4 text-sm flex-grow space-y-1">
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-arrival w-5 text-gray-400"></i> UO857 (NRT 8:00 → <span class="font-bold ml-1">11:55着</span>)</p>
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-departure w-5 text-gray-400"></i> UO622 (<span class="font-bold ml-1">17:35発</span> → HND 22:55)</p>
+                        <div class="w-16 flex-shrink-0 pt-1">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">山岡家</span>
+                        </div>
+                        <div class="ml-3 flex-grow space-y-3">
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-arrival mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">UO857</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(NRT 8:00 <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> <span class="font-bold text-gray-800">11:55着</span>)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-departure mt-1 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <div class="leading-tight">
+                                    <span class="text-sm font-medium">UO622</span><br>
+                                    <span class="text-[13px] inline-block mt-0.5">(<span class="font-bold text-gray-800">17:35発</span> <i class="fa-solid fa-arrow-right mx-0.5 text-gray-400 text-[10px]"></i> HND 22:55)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 橘家 -->
                     <div class="flex items-start bg-hk-light/50 p-4 rounded-xl border border-gray-50">
-                        <div class="w-16 flex-shrink-0 pt-1"><span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">橘家</span></div>
-                        <div class="ml-4 text-sm flex-grow space-y-1">
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-arrival w-5 text-gray-400"></i> 5/2 午前着想定</p>
-                            <p class="text-gray-600 flex items-center"><i class="fa-solid fa-plane-departure w-5 text-gray-400"></i> <span class="text-hk-accent font-bold ml-1">5/4 15:00 離脱 (夕方便)</span></p>
+                        <div class="w-16 flex-shrink-0 pt-1">
+                            <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">橘家</span>
+                        </div>
+                        <div class="ml-3 flex-grow space-y-3">
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-arrival mt-0.5 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <span class="text-sm">5/2 午前着想定</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-gray-600">
+                                <i class="fa-solid fa-plane-departure mt-0.5 text-gray-400 text-sm shrink-0 w-4 text-center"></i>
+                                <span class="text-sm text-hk-accent font-bold">5/4 15:00 離脱 (夕方便)</span>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -243,7 +292,7 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 10:15 - 13:05</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3 text-hk-navy">各家族 香港国際空港 到着</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">中村家(10:15着) <i class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> 山岡家(11:55着) <i class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> 野村家(13:05着)</p>
                     </div>
@@ -252,12 +301,12 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 14:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3 text-hk-navy flex items-center gap-2">全員合流！ <span class="text-2xl">🎉</span></h3>
                         <p class="text-gray-600 text-sm leading-relaxed mb-4">到着ロビーにて合流。その後、タクシー等で各ホテルへ移動し荷物を預けます。</p>
                         <div class="flex flex-col gap-2 bg-gray-50 p-3 rounded-xl text-sm border border-gray-100">
-                            <a href="https://maps.app.goo.gl/T4Y6v2U5Xw2YkRkP9" target="_blank" class="location-link"><i class="fa-solid fa-building text-gray-400 mr-2 !opacity-100 !transform-none"></i> The T Hotel (野村/中村) <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
-                            <a href="https://maps.app.goo.gl/P2Y4v2U5Xw2YkRkP9" target="_blank" class="location-link"><i class="fa-solid fa-building text-gray-400 mr-2 !opacity-100 !transform-none"></i> Gateway Hotel (山岡/橘) <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+T+Hotel,+Pok+Fu+Lam,+Hong+Kong" target="_blank" class="location-link"><i class="fa-solid fa-building text-gray-400 mr-2"></i> The T Hotel (野村/中村) <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Gateway+Hotel,+Tsim+Sha+Tsui,+Hong+Kong" target="_blank" class="location-link"><i class="fa-solid fa-building text-gray-400 mr-2"></i> Gateway Hotel (山岡/橘) <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -265,9 +314,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 16:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3">
-                            <a href="https://maps.app.goo.gl/yPcxC9H4S9Dndj6A8" target="_blank" class="location-link">アベニュー・オブ・スターズ 散策 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Avenue+of+Stars,+Hong+Kong" target="_blank" class="location-link">アベニュー・オブ・スターズ 散策 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-600 text-sm leading-relaxed">ビクトリア・ハーバーの絶景をバックに、まずは全員で記念撮影！📸</p>
                     </div>
@@ -276,10 +325,10 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 18:30 - 20:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-hk-gold text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg tracking-wider">RESERVED</div>
-                        <h3 class="text-xl font-bold mb-3">
-                            <a href="https://maps.app.goo.gl/3QW9VZQvXfVv5F3a7" target="_blank" class="location-link">夕食：神燈海鮮酒家 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <h3 class="text-xl font-bold mb-3 mt-1">
+                            <a href="https://www.google.com/maps/search/?api=1&query=神燈海鮮酒家+香港" target="_blank" class="location-link">夕食：神燈海鮮酒家 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-600 text-sm leading-relaxed">本格海鮮料理で乾杯！🍻 初日の夜を楽しみましょう。</p>
                     </div>
@@ -303,9 +352,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 07:00 - 07:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-2">
-                            <a href="https://maps.app.goo.gl/2tbp6Y45HLadT7eQ6" target="_blank" class="location-link">朝食：恒香冰室 (上環店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=恒香冰室+上環+香港" target="_blank" class="location-link">朝食：恒香冰室 (上環店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                     </div>
                 </div>
@@ -313,11 +362,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 08:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3 text-hk-navy">
-                            <a href="https://maps.app.goo.gl/F1Y4v2U5Xw2YkRkP9" target="_blank" class="location-link">香港マカオフェリーターミナル 出発 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hong+Kong+Macau+Ferry+Terminal" target="_blank" class="location-link">香港マカオフェリーターミナル 出発 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
-                        <div class="bg-blue-50/50 border-l-4 border-blue-400 p-4 rounded-r-lg mt-3">
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mt-3">
                             <p class="text-sm text-blue-900 font-bold mb-1"><i class="fa-solid fa-circle-info mr-1"></i> 幹事Memo</p>
                             <p class="text-xs text-gray-700 leading-relaxed">Klookで手配済。座席はバラバラの可能性が高いですが、約1時間の休息タイムと割り切りましょう😴</p>
                         </div>
@@ -327,9 +376,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 09:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold text-hk-navy">
-                            <a href="https://maps.app.goo.gl/M1Y4v2U5Xw2YkRkP9" target="_blank" class="location-link">マカオ到着・入国手続き <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Macau+Outer+Harbour+Ferry+Terminal" target="_blank" class="location-link">マカオ到着・入国手続き <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                     </div>
                 </div>
@@ -337,12 +386,12 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 10:15 - 11:05</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4 text-hk-navy">世界遺産エリア 観光</h3>
                         <div class="flex flex-col gap-3 mb-4">
-                            <a href="https://maps.app.goo.gl/kcpitQcDWJApN6QZ6" target="_blank" class="location-link bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-church text-hk-gold mr-3 !opacity-100 !transform-none"></i> 聖ドミニコ教会 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
-                            <a href="https://maps.app.goo.gl/m1a8TM82d88jeFft6" target="_blank" class="location-link bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-landmark text-hk-gold mr-3 !opacity-100 !transform-none"></i> 葡文本局 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
-                            <a href="https://maps.app.goo.gl/azP4rfB8WbSZ5hnZ6" target="_blank" class="location-link bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 text-sm"><i class="fa-brands fa-fort-awesome text-hk-gold mr-3 !opacity-100 !transform-none"></i> 聖ポール天主堂跡 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=St.+Dominic's+Church,+Macau" target="_blank" class="location-link bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-church text-hk-gold mr-3"></i> 聖ドミニコ教会 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Portuguese+Bookshop,+Macau" target="_blank" class="location-link bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-landmark text-hk-gold mr-3"></i> 葡文本局 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Ruins+of+St.+Paul's,+Macau" target="_blank" class="location-link bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-sm"><i class="fa-brands fa-fort-awesome text-hk-gold mr-3"></i> 聖ポール天主堂跡 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
                         </div>
                         <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
                             <p class="text-sm text-amber-900 font-bold mb-1"><i class="fa-regular fa-lightbulb mr-1"></i> 8人移動のTip!</p>
@@ -354,10 +403,10 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 11:30 - 13:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-hk-gold text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg tracking-wider">RESERVED</div>
-                        <h3 class="text-xl font-bold mb-2">
-                            <a href="https://maps.app.goo.gl/vAXnKM2MUZwiZZJj7" target="_blank" class="location-link">昼食：葡景轩 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <h3 class="text-xl font-bold mb-2 mt-1">
+                            <a href="https://www.google.com/maps/search/?api=1&query=葡景轩+Alma+Macau" target="_blank" class="location-link">昼食：葡景轩 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-500 text-sm">正宗葡国菜（ポルトガル料理）を堪能🍷</p>
                     </div>
@@ -366,11 +415,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 13:15 - 13:45</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4 text-hk-navy">お土産ショッピング</h3>
                         <div class="flex flex-col gap-3">
-                            <a href="https://maps.app.goo.gl/xmMyjykvpJSMfJ8g9" target="_blank" class="location-link bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-cookie text-orange-400 mr-3 !opacity-100 !transform-none"></i> 英記餅家（スヌーピー） <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
-                            <a href="https://maps.app.goo.gl/Grh2EnuLZbnKFDgp9" target="_blank" class="location-link bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-bag-shopping text-blue-400 mr-3 !opacity-100 !transform-none"></i> MinM plaza澳品薈 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=澳門英記餅家" target="_blank" class="location-link bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-cookie text-orange-400 mr-3"></i> 英記餅家（スヌーピー） <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=MinM+plaza+澳品薈" target="_blank" class="location-link bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-sm"><i class="fa-solid fa-bag-shopping text-blue-400 mr-3"></i> MinM plaza澳品薈 <i class="fa-solid fa-arrow-up-right-from-square ml-auto"></i></a>
                         </div>
                     </div>
                 </div>
@@ -378,9 +427,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 14:05 - 16:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3">
-                            <a href="https://maps.app.goo.gl/rEGRBZGo1azdetnNA" target="_blank" class="location-link">ザ・ベネチアン・マカオ <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+Venetian+Macao" target="_blank" class="location-link">ザ・ベネチアン・マカオ <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-600 text-sm leading-relaxed">コタイ地区へ移動。カジノ、運河エリア、O-MOONなどを散策🎰</p>
                     </div>
@@ -389,9 +438,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 16:05</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-3">
-                            <a href="https://maps.app.goo.gl/zKU9d8SdpuX38Nwg6" target="_blank" class="location-link">ザ・パリジャン・マカオ <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+Parisian+Macao" target="_blank" class="location-link">ザ・パリジャン・マカオ <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-600 text-sm leading-relaxed">エッフェル塔をバックに記念撮影🗼</p>
                     </div>
@@ -400,11 +449,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 16:30 - 17:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4">
-                            <a href="https://maps.app.goo.gl/Jy6vqYycFnVyeLiV7" target="_blank" class="location-link">タイパ・ヴィレッジ 散策 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Taipa+Village,+Macau" target="_blank" class="location-link">タイパ・ヴィレッジ 散策 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
-                        <div class="bg-red-50/80 border-l-4 border-red-400 p-4 rounded-r-lg">
+                        <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
                             <p class="text-sm text-red-900 font-bold mb-1"><i class="fa-solid fa-car-side mr-1"></i> 帰路のTip!</p>
                             <p class="text-xs text-gray-700 leading-relaxed">夕方はタクシーが捕まりにくく道が混み合うため、予約に間に合うよう17:15頃には半島側へ戻る動きを始めましょう。</p>
                         </div>
@@ -414,10 +463,10 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 18:00 - 19:50</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-hk-gold/30 relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-hk-gold text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg tracking-wider">RESERVED</div>
-                        <h3 class="text-xl font-bold mb-2">
-                            <a href="https://maps.app.goo.gl/Fj54E7UbGswPDhPu7" target="_blank" class="location-link">夕食：Vic’s Restaurante <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <h3 class="text-xl font-bold mb-2 mt-1">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Vic's+Restaurante,+Macau" target="_blank" class="location-link">夕食：Vic’s Restaurante <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                     </div>
                 </div>
@@ -425,9 +474,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 21:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold text-hk-navy">
-                            <a href="https://maps.app.goo.gl/M1Y4v2U5Xw2YkRkP9" target="_blank" class="location-link">フェリー発 <i class="fa-solid fa-arrow-right mx-2 text-gray-300"></i> 22:00 香港着 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            フェリー発 <i class="fa-solid fa-arrow-right mx-2 text-gray-300"></i> 22:00 香港着
                         </h3>
                     </div>
                 </div>
@@ -450,9 +499,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 07:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-2">
-                            <a href="https://maps.app.goo.gl/UM8VanyeEPyxVCTW7" target="_blank" class="location-link">朝食：得闲饮茶 (深水埗店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=得闲饮茶+Let's+Yum+Cha+Sham+Shui+Po" target="_blank" class="location-link">朝食：得闲饮茶 (深水埗店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-500 text-sm">飲茶でエネルギーチャージ！🥟</p>
                     </div>
@@ -461,11 +510,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 09:00 - 21:00</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4">
-                            <a href="https://maps.app.goo.gl/PZXTUy_8AzQRBVRH5GyvszU" target="_blank" class="location-link">香港ディズニーランド <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hong+Kong+Disneyland" target="_blank" class="location-link">香港ディズニーランド <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
-                        <div class="bg-orange-50/80 border-l-4 border-orange-400 p-4 rounded-r-lg shadow-sm">
+                        <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg shadow-sm">
                             <h4 class="font-bold text-orange-900 mb-1 text-sm"><i class="fa-solid fa-plane-departure mr-2"></i>15:00頃：橘家の皆様はお別れ</h4>
                             <p class="text-xs text-gray-700 leading-relaxed">夕方のフライトのため、橘家はディズニー途中で離脱となります。最高の思い出を！👋</p>
                         </div>
@@ -490,9 +539,9 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 08:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-2">
-                            <a href="https://maps.app.goo.gl/kMrZYUadnvdzDkzq7" target="_blank" class="location-link">朝食：蘭芳園 (中環老店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Lan+Fong+Yuen+Central" target="_blank" class="location-link">朝食：蘭芳園 (中環老店) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
                         <p class="text-gray-500 text-sm">有名なシルキーミルクティーを🧋</p>
                     </div>
@@ -501,11 +550,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 09:30 - 11:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4 text-hk-navy">チーム分割ミッション！🎯</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <a href="https://maps.app.goo.gl/P7X-I-4ABDQRf4Y_m7z2M78" target="_blank" class="block bg-gray-50 p-4 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors group">
-                                <h4 class="font-bold text-sm mb-2 text-gray-800 group-hover:text-hk-gold transition-colors"><i class="fa-brands fa-apple mr-2 text-lg align-middle"></i> iPhone購入チーム <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></h4>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Apple+Store+IFC+Mall" target="_blank" class="block bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                <h4 class="font-bold text-sm mb-2 text-gray-800"><i class="fa-brands fa-apple mr-2 text-lg align-middle"></i> iPhone購入チーム <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1 text-hk-gold"></i></h4>
                                 <p class="text-xs text-gray-600 mb-1">野村家・中村家</p>
                                 <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot mr-1"></i>Apple Store IFC Mall</p>
                             </a>
@@ -521,11 +570,11 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 12:30</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4">
-                            <a href="https://maps.app.goo.gl/j6xw1BCJHihhrooV8" target="_blank" class="location-link">昼食：九記牛腩 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Central" target="_blank" class="location-link">昼食：九記牛腩 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </h3>
-                        <div class="bg-amber-50/80 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
                             <p class="text-sm text-amber-900 font-bold mb-1"><i class="fa-solid fa-utensils mr-1"></i> 食事のTip!</p>
                             <p class="text-xs text-gray-700 leading-relaxed">超人気店で席が狭いため、8人が同席するのは困難です。<b>「4名ずつの2グループ」</b>に分かれて並び、入れた組からサクッと食べるのが正解です🍜</p>
                         </div>
@@ -535,12 +584,12 @@
                 <div class="relative pl-10 mb-10 scroll-animate">
                     <div class="timeline-dot"></div>
                     <div class="text-hk-gold font-bold text-sm mb-2 tracking-widest"><i class="fa-regular fa-clock mr-1"></i> 15:30 以降</div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100">
                         <h3 class="text-xl font-bold mb-4 text-hk-navy">ホテルで荷物をピックアップし空港へ ✈️</h3>
                         <ul class="text-sm text-gray-600 space-y-3">
-                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded mr-3">山岡家</span> Gateway <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 17:35 フライト</li>
-                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mr-3">野村家</span> The T Hotel <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 17:45 フライト</li>
-                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded mr-3">中村家</span> The T Hotel <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 20:00 フライト <span class="ml-auto text-xs text-gray-400">(余裕あり)</span></li>
+                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded mr-3 shrink-0">山岡家</span> Gateway <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 17:35 フライト</li>
+                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mr-3 shrink-0">野村家</span> The T Hotel <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 17:45 フライト</li>
+                            <li class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded mr-3 shrink-0">中村家</span> The T Hotel <i class="fa-solid fa-arrow-right mx-2 text-gray-400"></i> 20:00 フライト <span class="ml-auto text-[10px] text-gray-400 shrink-0">(余裕あり)</span></li>
                         </ul>
                     </div>
                 </div>

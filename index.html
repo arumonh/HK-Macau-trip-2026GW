@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hong Kong & Macau Trip 2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        hk: {
+                            navy: '#1A2E44',
+                            gold: '#D4AF37',
+                            light: '#F8F9FA',
+                            card: '#FFFFFF',
+                            accent: '#E63946'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-tap-highlight-color: transparent; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 46, 68, 0.6), rgba(26, 46, 68, 0.8)), url('https://images.unsplash.com/photo-1542223616-740d5dff7f56?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -29px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #D4AF37;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 0 0 1px #D4AF37;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Chat Modal Styles */
+        #chat-modal {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #chat-modal.open {
+            transform: translateY(0);
+        }
+        .chat-bubble {
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #9CA3AF;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-hk-light text-gray-800 relative min-h-screen">
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white pt-20 pb-16 px-6 rounded-b-3xl shadow-xl relative overflow-hidden">
+        <div class="relative z-10 text-center">
+            <p class="text-hk-gold font-serif italic text-lg mb-2">4 Families Golden Week Journey</p>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-wider mb-4 font-serif">HONG KONG <br>& MACAU</h1>
+            <p class="text-sm opacity-90 font-light tracking-widest uppercase">May 2 - May 5, 2024</p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm">
+        <ul class="flex overflow-x-auto no-scrollbar justify-start md:justify-center px-4 py-3 space-x-6 text-sm font-medium">
+            <li><button onclick="switchTab('info')" id="tab-info" class="tab-btn pb-1 border-b-2 border-hk-gold text-hk-navy whitespace-nowrap"><i class="fa-solid fa-plane-departure mr-1"></i> INFO</button></li>
+            <li><button onclick="switchTab('day1')" id="tab-day1" class="tab-btn pb-1 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap">DAY 1 (5/2)</button></li>
+            <li><button onclick="switchTab('day2')" id="tab-day2" class="tab-btn pb-1 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap">DAY 2 (5/3)</button></li>
+            <li><button onclick="switchTab('day3')" id="tab-day3" class="tab-btn pb-1 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap">DAY 3 (5/4)</button></li>
+            <li><button onclick="switchTab('day4')" id="tab-day4" class="tab-btn pb-1 border-b-2 border-transparent text-gray-400 hover:text-hk-navy whitespace-nowrap">DAY 4 (5/5)</button></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-3xl mx-auto px-4 py-8 mb-24">
+
+        <!-- ================= INFO TAB ================= -->
+        <section id="info" class="tab-content active">
+            <h2 class="text-2xl font-serif font-bold text-hk-navy mb-6 flex items-center">
+                <i class="fa-solid fa-passport text-hk-gold mr-3"></i> Travel Details
+            </h2>
+
+            <!-- Hotels -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm mb-6 border border-gray-100">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2"><i class="fa-solid fa-hotel text-hk-navy mr-2"></i>宿泊先ホテル</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <p class="font-bold text-hk-navy mb-1">The T Hotel</p>
+                        <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-location-dot mr-1"></i>Pok Fu Lam (薄扶林)</p>
+                        <p class="text-sm font-medium">🏨 野村家・中村家</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <p class="font-bold text-hk-navy mb-1">Gateway Hotel</p>
+                        <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-location-dot mr-1"></i>Tsim Sha Tsui (尖沙咀)</p>
+                        <p class="text-sm font-medium">🏨 山岡家・橘家</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2"><i class="fa-solid fa-plane text-hk-navy mr-2"></i>フライト情報</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-16 flex-shrink-0 text-center pt-1"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">野村家</span></div>
+                        <div class="ml-3 text-sm flex-grow">
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">往路:</span> CA111 (PEK 9:25 → <span class="text-hk-accent font-bold">13:05着</span>)</p>
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">復路:</span> CA110 (<span class="font-bold">17:45発</span> → PEK 21:15)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-16 flex-shrink-0 text-center pt-1"><span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">中村家</span></div>
+                        <div class="ml-3 text-sm flex-grow">
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">往路:</span> UO625 (HND 6:35 → <span class="text-hk-accent font-bold">10:15着</span>)</p>
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">復路:</span> UO628 (<span class="font-bold">20:00発</span> → HND 1:20)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-16 flex-shrink-0 text-center pt-1"><span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded">山岡家</span></div>
+                        <div class="ml-3 text-sm flex-grow">
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">往路:</span> UO857 (NRT 8:00 → <span class="font-bold">11:55着</span>)</p>
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">復路:</span> UO622 (<span class="font-bold">17:35発</span> → HND 22:55)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-16 flex-shrink-0 text-center pt-1"><span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-1 rounded">橘家</span></div>
+                        <div class="ml-3 text-sm flex-grow">
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">往路:</span> 5/2 午前着想定</p>
+                            <p class="text-gray-600"><span class="font-bold text-gray-800">復路:</span> <span class="text-hk-accent font-bold">5/4 15:00 離脱 (夕方便)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DAY 1 TAB ================= -->
+        <section id="day1" class="tab-content">
+            <h2 class="text-3xl font-serif font-bold text-hk-navy mb-2">Day 1</h2>
+            <p class="text-gray-500 mb-6 font-medium">May 2, Thursday — Arrival & Victoria Harbour</p>
+
+            <!-- Map View -->
+            <div class="map-container">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0" 
+                    src="https://maps.google.com/maps?q=Avenue+of+Stars,Kam+Lamp+Seafood+Restaurant+Jordan&t=&z=14&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+
+            <div class="border-l-2 border-gray-200 ml-5 space-y-8 pb-8">
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">10:15 - 13:05</div>
+                    <h3 class="text-xl font-bold mb-2">各家族 香港国際空港 到着</h3>
+                    <p class="text-gray-600 text-sm mb-2">中村家(10:15着) → 山岡家(11:55着) → 野村家(13:05着)</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">14:00</div>
+                    <h3 class="text-xl font-bold mb-2">全員合流！</h3>
+                    <p class="text-gray-600 text-sm mb-3">到着ロビーにて合流。その後、タクシー等で各ホテルへ移動し荷物を預けます。</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">16:30</div>
+                    <h3 class="text-xl font-bold mb-2">アベニュー・オブ・スターズ 散策</h3>
+                    <p class="text-gray-600 text-sm mb-3">ビクトリア・ハーバーの絶景をバックに、まずは全員で記念撮影！</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">18:30 - 20:30</div>
+                    <h3 class="text-xl font-bold mb-2">夕食：神燈海鮮酒家 <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2 align-middle">予約済</span></h3>
+                    <p class="text-gray-600 text-sm mb-3">本格海鮮料理で乾杯！初日の夜を楽しみましょう。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DAY 2 TAB ================= -->
+        <section id="day2" class="tab-content">
+            <h2 class="text-3xl font-serif font-bold text-hk-navy mb-2">Day 2</h2>
+            <p class="text-gray-500 mb-6 font-medium">May 3, Friday — Macau World Heritage & Casino</p>
+            
+            <!-- Map View -->
+            <div class="map-container">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0" 
+                    src="https://maps.google.com/maps?q=Ruins+of+St.+Paul's,Macau+Venetian+Macao,Vic's+Restaurante&t=&z=12&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+
+            <div class="border-l-2 border-gray-200 ml-5 space-y-8 pb-8">
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">07:00 - 07:30</div>
+                    <h3 class="text-xl font-bold mb-2">朝食：恒香冰室 (上環店)</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">08:30</div>
+                    <h3 class="text-xl font-bold mb-2">香港マカオフェリーターミナル 出発</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">09:30</div>
+                    <h3 class="text-xl font-bold mb-2">マカオ到着・入国手続き</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">10:15 - 11:05</div>
+                    <h3 class="text-xl font-bold mb-2">世界遺産エリア 観光</h3>
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md border">聖ドミニコ教会</span>
+                        <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md border">葡文本局</span>
+                        <span class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md border">聖ポール天主堂跡</span>
+                    </div>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">11:30 - 13:00</div>
+                    <h3 class="text-xl font-bold mb-2">昼食：葡景轩 <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2 align-middle">予約済</span></h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">13:15 - 13:45</div>
+                    <h3 class="text-xl font-bold mb-2">お土産ショッピング</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">14:05 - 16:00</div>
+                    <h3 class="text-xl font-bold mb-2">ザ・ベネチアン・マカオ</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">16:05</div>
+                    <h3 class="text-xl font-bold mb-2">ザ・パリジャン・マカオ</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">16:30 - 17:30</div>
+                    <h3 class="text-xl font-bold mb-2">タイパ・ヴィレッジ 散策</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">18:00 - 19:50</div>
+                    <h3 class="text-xl font-bold mb-2">夕食：Vic’s Restaurante <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2 align-middle">予約済</span></h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">21:00</div>
+                    <h3 class="text-xl font-bold mb-2">フェリー発 → 22:00 香港着</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DAY 3 TAB ================= -->
+        <section id="day3" class="tab-content">
+            <h2 class="text-3xl font-serif font-bold text-hk-navy mb-2">Day 3</h2>
+            <p class="text-gray-500 mb-6 font-medium">May 4, Saturday — Magic at Disneyland</p>
+
+            <!-- Map View -->
+            <div class="map-container">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0" 
+                    src="https://maps.google.com/maps?q=Hong+Kong+Disneyland&t=&z=14&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+
+            <div class="border-l-2 border-gray-200 ml-5 space-y-8 pb-8">
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">07:00</div>
+                    <h3 class="text-xl font-bold mb-2">朝食：得闲饮茶 (深水埗店)</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">09:00 - 21:00</div>
+                    <h3 class="text-xl font-bold mb-2">香港ディズニーランド</h3>
+                    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg shadow-sm mt-3">
+                        <h4 class="font-bold text-orange-800 mb-1"><i class="fa-solid fa-plane-departure mr-2"></i>15:00頃：橘家の皆様はお別れ</h4>
+                        <p class="text-sm text-gray-700">夕方のフライトのため、橘家はディズニー途中で離脱となります。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DAY 4 TAB ================= -->
+        <section id="day4" class="tab-content">
+            <h2 class="text-3xl font-serif font-bold text-hk-navy mb-2">Day 4</h2>
+            <p class="text-gray-500 mb-6 font-medium">May 5, Sunday — Local Food & Missions</p>
+
+            <!-- Map View -->
+            <div class="map-container">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0" 
+                    src="https://maps.google.com/maps?q=Lan+Fong+Yuen+Central,Apple+Store+IFC+Mall,Kau+Kee+Restaurant&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                </iframe>
+            </div>
+
+            <div class="border-l-2 border-gray-200 ml-5 space-y-8 pb-8">
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">08:30</div>
+                    <h3 class="text-xl font-bold mb-2">朝食：蘭芳園 (中環老店)</h3>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">09:30 - 11:30</div>
+                    <h3 class="text-xl font-bold mb-3">チーム分割ミッション！</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-200">
+                            <h4 class="font-bold text-sm mb-1"><i class="fa-brands fa-apple mr-1"></i> iPhone購入チーム</h4>
+                            <p class="text-xs text-gray-600">野村家・中村家</p>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-200">
+                            <h4 class="font-bold text-sm mb-1"><i class="fa-solid fa-building-columns mr-1"></i> 銀行解約チーム</h4>
+                            <p class="text-xs text-gray-600">山岡家</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">12:30</div>
+                    <h3 class="text-xl font-bold mb-2">昼食：九記牛腩</h3>
+                    <p class="text-gray-600 text-sm mb-3">香港一の牛バラ麺！</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="timeline-dot"></div>
+                    <div class="text-hk-navy font-bold text-lg mb-1">15:30 以降</div>
+                    <h3 class="text-xl font-bold mb-2">ホテルで荷物をピックアップし空港へ</h3>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Action Button for AI Chat -->
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-hk-gold hover:bg-yellow-600 text-white font-bold py-3 px-5 rounded-full shadow-lg flex items-center gap-2 z-50 transition-transform transform hover:scale-105 active:scale-95">
+        <i class="fa-solid fa-sparkles"></i> ✨ 旅のAI相談役
+    </button>
+
+    <!-- AI Chat Modal -->
+    <div id="chat-modal" class="fixed inset-x-0 bottom-0 z-50 flex justify-center pointer-events-none px-2 sm:px-0">
+        <div class="bg-white w-full max-w-md rounded-t-2xl shadow-2xl flex flex-col pointer-events-auto border border-gray-200" style="height: 80vh; max-height: 600px;">
+            <!-- Header -->
+            <div class="bg-hk-navy text-white px-4 py-3 rounded-t-2xl flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-hk-gold"></i>
+                    <h3 class="font-bold font-serif">Trip Concierge</h3>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-300 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Chat Messages Area -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                <!-- Initial Message -->
+                <div class="flex justify-start">
+                    <div class="bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 chat-bubble shadow-sm text-sm">
+                        こんにちは！✨ 私は皆さんの旅程を把握しているAIコンシェルジュです。<br><br>
+                        「神燈海鮮酒家で使える広東語は？」<br>
+                        「マカオでの注意点は？」<br>
+                        「野村家の帰りのフライトは何時だっけ？」<br><br>
+                        など、何でも聞いてくださいね！
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggested Prompts -->
+            <div class="px-4 py-2 bg-white border-t border-gray-100 flex gap-2 overflow-x-auto no-scrollbar">
+                <button onclick="sendSuggested('マカオの定番のお土産を教えて')" class="whitespace-nowrap text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition">🎁 おすすめ土産は？</button>
+                <button onclick="sendSuggested('レストランで使える簡単な広東語の挨拶は？')" class="whitespace-nowrap text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition">🗣️ 広東語の挨拶</button>
+                <button onclick="sendSuggested('九記牛腩でのオススメメニューを教えて')" class="whitespace-nowrap text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition">🍜 牛バラ麺のおすすめ</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-3 bg-white border-t border-gray-200 flex gap-2">
+                <input type="text" id="chat-input" placeholder="質問を入力..." class="flex-1 bg-gray-100 text-sm rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-hk-gold transition" onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()" class="bg-hk-navy hover:bg-blue-900 text-white w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition">
+                    <i class="fa-solid fa-paper-plane text-sm -ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('border-hk-gold', 'text-hk-navy');
+                el.classList.add('border-transparent', 'text-gray-400');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-gray-400');
+            activeBtn.classList.add('border-hk-gold', 'text-hk-navy');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // Gemini API Integration - AI Concierge
+        // ==========================================
+        const apiKey = ""; // Gemini API Key goes here
+        let chatHistory = [];
+        const systemPrompt = `
+あなたは2024年ゴールデンウィークに香港・マカオへ旅行する4家族の専属AIコンシェルジュです。
+ユーザーからの質問に対して、フレンドリーかつ的確に、時にはユーモアを交えて日本語で答えてください。
+回答は簡潔にし、Markdownは最小限（太字程度）にしてください。
+
+【旅程の前提知識】
+参加者: 野村家, 中村家, 山岡家, 橘家の計4家族（大人8名）
+ホテル: 野村・中村家は The T Hotel (薄扶林)、山岡・橘家は Gateway Hotel (尖沙咀)
+
+日程:
+- 5/2 (Day 1): 14:00香港国際空港合流。ホテル移動後、16:30アベニュー・オブ・スターズ。18:30神燈海鮮酒家(夕食)。
+- 5/3 (Day 2): マカオ日帰り。08:30上環発フェリー。聖ドミニコ教会, 葡文本局, 聖ポール天主堂跡を散策。11:30葡景轩(昼食)。ベネチアン, パリジャン, タイパヴィレッジ散策。18:00 Vic's Restaurante(夕食)。21:00マカオ発フェリー。
+- 5/4 (Day 3): 香港ディズニーランド。※橘家のみ15:00に離脱して帰国。
+- 5/5 (Day 4): 08:30蘭芳園(朝食)。午前は野村・中村がiPhone購入(Apple Store IFC)、山岡家が銀行解約。12:30九記牛腩(昼食)。夕方以降順次フライトで帰国。
+
+フライト:
+野村家 5/2 13:05着 / 5/5 17:45発
+中村家 5/2 10:15着 / 5/5 20:00発
+山岡家 5/2 11:55着 / 5/5 17:35発
+橘家 5/4 15:00離脱・夕方便
+
+ユーザーから「〇〇家は何時？」と聞かれたり、現地のグルメや広東語・ポルトガル語の挨拶を聞かれたら、この文脈に沿って答えてください。
+`;
+
+        function toggleChat() {
+            const modal = document.getElementById('chat-modal');
+            modal.classList.toggle('open');
+            if(modal.classList.contains('open')) {
+                document.getElementById('chat-input').focus();
+            }
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendSuggested(text) {
+            const input = document.getElementById('chat-input');
+            input.value = text;
+            sendMessage();
+        }
+
+        function appendMessage(text, isUser) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+            
+            // Format simple markdown (bold) and line breaks
+            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+
+            wrapper.innerHTML = `
+                <div class="${isUser ? 'bg-hk-gold text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm'} rounded-2xl px-4 py-2 chat-bubble shadow-sm text-sm">
+                    ${formattedText}
+                </div>
+            `;
+            messagesDiv.appendChild(wrapper);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTyping() {
+            const messagesDiv = document.getElementById('chat-messages');
+            const wrapper = document.createElement('div');
+            wrapper.id = 'typing-indicator';
+            wrapper.className = 'flex justify-start';
+            wrapper.innerHTML = `
+                <div class="bg-white border border-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 chat-bubble shadow-sm typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            messagesDiv.appendChild(wrapper);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function removeTyping() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+        }
+
+        // Exponential backoff fetch
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    await new Promise(res => setTimeout(res, delays[i]));
+                }
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Show user message
+            appendMessage(text, true);
+            input.value = '';
+            
+            // Show typing indicator
+            showTyping();
+
+            // Prepare history for Gemini
+            chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+            const payload = {
+                contents: chatHistory,
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const result = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                removeTyping();
+
+                if (result && result.candidates && result.candidates[0].content) {
+                    const replyText = result.candidates[0].content.parts[0].text;
+                    appendMessage(replyText, false);
+                    chatHistory.push({ role: "model", parts: [{ text: replyText }] });
+                } else {
+                    appendMessage("すみません、少し混乱してしまいました。もう一度聞いていただけますか？💦", false);
+                }
+            } catch (error) {
+                removeTyping();
+                console.error("Gemini API Error:", error);
+                appendMessage("通信エラーが発生しました⚠️ 少し時間をおいてお試しください。", false);
+            }
+        }
+    </script>
+</body>
+</html>

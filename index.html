@@ -143,20 +143,22 @@
         #healing-cat {
             position: fixed;
             bottom: 95px;
-            left: 5px;
-            width: 120px;
-            height: 140px;
-            /* アップロードする画像ファイル名を指定 */
+            left: 10px;
+            /* スマホで邪魔にならない適度なサイズ */
+            width: 90px;
+            height: 110px;
             background-image: url('image.png'); 
-            /* 4匹の画像から右上を抽出するためのサイズと位置調整 */
-            background-size: 200% 200%;
-            background-position: 100% 0%; 
+            /* 【修正】ズームを解除し、画像全体をそのまま綺麗に収める設定 */
+            background-size: contain; 
+            background-position: bottom left; 
             background-repeat: no-repeat;
             z-index: 40;
             cursor: pointer;
             /* 呼吸するような自然な動き */
             animation: breathe 4s ease-in-out infinite;
             -webkit-tap-highlight-color: transparent;
+            /* 透過画像の形に沿ってフワッと影を落とす（リッチな質感） */
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
         }
         
         @keyframes breathe {
@@ -176,7 +178,7 @@
         /* 吹き出しのスタイル */
         .cat-message {
             position: absolute;
-            top: -25px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: rgba(255, 255, 255, 0.95);
@@ -1122,7 +1124,7 @@
                 { lat: 22.3057, lng: 114.1706, title: "神燈海鮮酒家" }
             ],
             day2: [
-                { lat: 22.2882, lng: 114.1517, title: "香港マカオフェリーターミナル" },
+                { lat: 22.2882, lng: 114.1517, title: "香港マカフェリーターミナル" },
                 { lat: 22.1970, lng: 113.5558, title: "外港フェリーターミナル" },
                 { lat: 22.1939, lng: 113.5407, title: "聖ドミニコ教会" },
                 { lat: 22.1934, lng: 113.5398, title: "葡文本局" },

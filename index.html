@@ -142,15 +142,15 @@
         /* ================= Healing Cat CSS ================= */
         #healing-cat {
             position: fixed;
-            bottom: 100px;
-            left: 15px;
-            width: 80px;
-            height: 90px;
+            bottom: 95px;
+            left: 5px;
+            width: 120px;
+            height: 140px;
             /* アップロードする画像ファイル名を指定 */
             background-image: url('image.png'); 
             /* 4匹の画像から右上を抽出するためのサイズと位置調整 */
-            background-size: 220% 200%;
-            background-position: right top; 
+            background-size: 200% 200%;
+            background-position: 100% 0%; 
             background-repeat: no-repeat;
             z-index: 40;
             cursor: pointer;
@@ -176,7 +176,7 @@
         /* 吹き出しのスタイル */
         .cat-message {
             position: absolute;
-            top: -35px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: rgba(255, 255, 255, 0.95);
@@ -1049,14 +1049,14 @@
 
         // --- 3. Stateful Checklist ---
         const checklistItems = [
-            { id: 'chk-passport', label: 'パスポート (期限確認!)' },
-            { id: 'chk-esim', label: 'eSIM / Wi-Fiルーター' },
-            { id: 'chk-battery', label: 'モバイルバッテリー' },
-            { id: 'chk-jacket', label: '冷房対策の羽織もの (必須)' },
-            { id: 'chk-shoes', label: '歩きやすい靴' },
-            { id: 'chk-medicine', label: '常備薬・胃腸薬' },
+            { id: 'chk-passport', label: 'パスポート (残存期間確認!)' },
             { id: 'chk-plug', label: '変換プラグ (BFタイプ)' },
-            { id: 'chk-cash', label: '香港ドル (少額現金)' }
+            { id: 'chk-jacket', label: '冷房対策の羽織もの (冷蔵庫状態)' },
+            { id: 'chk-tissue', label: 'ポケットティッシュ (食堂に無い)' },
+            { id: 'chk-umbrella', label: '晴雨兼用傘 (5月の天気対策)' },
+            { id: 'chk-ecobag', label: 'エコバッグ (レジ袋有料)' },
+            { id: 'chk-battery', label: 'モバイルバッテリー (必須)' },
+            { id: 'chk-cash', label: '香港ドル現金 / オクトパス準備' }
         ];
 
         function initChecklist() {

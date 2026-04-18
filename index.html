@@ -178,12 +178,12 @@
         /* 吹き出しのスタイル */
         .cat-message {
             position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
+            bottom: 110px; /* 猫の上部に配置 */
+            left: -5px; /* 画面左端から少し余裕を持たせて右に伸ばす */
+            transform: translateY(10px);
             background: rgba(255, 255, 255, 0.95);
             color: #8A9A86;
-            padding: 5px 12px;
+            padding: 8px 14px;
             border-radius: 12px;
             font-size: 11px;
             font-weight: bold;
@@ -191,14 +191,14 @@
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            white-space: nowrap;
+            white-space: nowrap; /* または max-width を指定して改行させる */
         }
         .cat-message::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 25px; /* 吹き出しの尻尾を猫の頭付近に配置 */
+            transform: none;
             border-width: 5px 5px 0;
             border-style: solid;
             border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
@@ -206,7 +206,7 @@
         /* 吹き出し表示時のアニメーション */
         #healing-cat.meow .cat-message {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
         }
     </style>
 </head>

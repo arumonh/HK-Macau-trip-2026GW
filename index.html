@@ -255,8 +255,6 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
-=======
             <!-- 指差し広東語（普通話ピンイン付き） -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 mb-8 scroll-animate">
                 <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-language text-theme-sage mr-2"></i> 指差し広東語</h3>
@@ -326,7 +324,6 @@
                 </div>
             </div>
 
->>>>>>> f93db55 (Relink local workspace and sync with GitHub)
             <!-- Hotels -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm mb-8 border border-gray-100 scroll-animate">
                 <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-hotel text-theme-sage mr-2"></i> 宿泊先</h3>
@@ -1247,9 +1244,6 @@
 
         // --- 6. Healing Cat Logic ---
         const cat = document.getElementById('healing-cat');
-<<<<<<< HEAD
-        const catMessages = ['楽しみだニャ🐾', '忘れ物はないニャ？', 'ワクワクだニャ✨', 'いい旅をニャ！'];
-=======
         
         function getCatMessage() {
             const hour = new Date().getHours();
@@ -1285,16 +1279,11 @@
             return messages[Math.floor(Math.random() * messages.length)];
         }
 
->>>>>>> f93db55 (Relink local workspace and sync with GitHub)
         if (cat) {
             cat.addEventListener('click', () => {
                 if(cat.classList.contains('meow')) return;
                 const msgEl = cat.querySelector('.cat-message');
-<<<<<<< HEAD
-                msgEl.innerText = catMessages[Math.floor(Math.random() * catMessages.length)];
-=======
                 msgEl.innerText = getCatMessage();
->>>>>>> f93db55 (Relink local workspace and sync with GitHub)
                 cat.classList.add('meow');
                 setTimeout(() => {
                     cat.classList.remove('meow');

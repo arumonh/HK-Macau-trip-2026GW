@@ -145,9 +145,9 @@
             bottom: 95px;
             left: 10px;
             /* スマホで邪魔にならない適度なサイズ */
-            width: 90px;
+            width: 100px; /* 画像が変わったので幅を少し調整しやすいように */
             height: 110px;
-            background-image: url('image.png'); 
+            background-image: url('lulu.gif'); 
             /* 【修正】ズームを解除し、画像全体をそのまま綺麗に収める設定 */
             background-size: contain; 
             background-position: bottom left; 
@@ -170,9 +170,17 @@
         #healing-cat.meow {
             animation: jump 0.4s ease;
         }
+        #healing-cat.spin {
+            animation: spinCat 0.6s ease-in-out;
+        }
         @keyframes jump {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-12px) scale(1.05); }
+        }
+        @keyframes spinCat {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(180deg) scale(1.1); }
+            100% { transform: translateY(0) rotate(360deg) scale(1); }
         }
 
         /* 吹き出しのスタイル */
@@ -1327,51 +1335,151 @@
 
         // --- 6. Healing Cat Logic ---
         const cat = document.getElementById('healing-cat');
-        
         function getCatMessage() {
+            const activeTab = document.querySelector('.tab-content.active');
+            const tabId = activeTab ? activeTab.id : '';
             const hour = new Date().getHours();
             let messages = [];
-            
-            if (hour >= 5 && hour < 11) {
-                // 朝のセリフ
+
+            if (tabId === 'info') {
                 messages = [
-                    'おはようニャ！今日もいっぱい歩くニャ🐾',
-                    '朝ごはんは飲茶かニャ？🥟',
-                    'るるはお留守番がんばってるニャ🐈‍⬛',
-                    '忘れ物はないニャ？気をつけるニャ！'
+                    'パスポートとオクトパスは持ったかニャ？',
+                    '緊急連絡先もここにあるニャ。安心ニャ！',
+                    'お留守番長いニャ…チュール忘れないでニャ🐾'
                 ];
-            } else if (hour >= 11 && hour < 17) {
-                // 昼間のセリフ
+            } else if (tabId === 'words') {
                 messages = [
-                    'そっちは暑いかニャ？💦',
-                    '美味しいもの食べてるかニャ？るるにもちょうだいニャ🐟',
-                    'チュール買ってくるの忘れないでニャ🐾',
-                    'るるの分まで楽しんでくるニャ！'
+                    '広東語のお勉強かニャ？「むーがい！」だニャ😸',
+                    '美味しいもの注文してニャ🥟',
+                    '「てぃーしー」はタクシーのことだニャ🚗'
+                ];
+            } else if (tabId.startsWith('day')) {
+                messages = [
+                    '今日はここに行くのかニャ？迷子にならないでニャ🐾',
+                    'るるの分まで楽しんでくるニャ～！',
+                    'そっちは暑いかニャ？水分補給するニャ💧',
+                    'たくさん写真撮ってお土産話きかせてニャ😽'
                 ];
             } else {
-                // 夜のセリフ
-                messages = [
-                    'お土産は高級な猫缶で頼むニャ😽',
-                    '夜更かししすぎないで早く寝るニャ〜🌙',
-                    '早く帰ってきていっぱい撫でてほしいニャ〜🐾',
-                    '綺麗な夜景、るるも見たいニャ✨',
-                    'お留守番長いニャ…ちょっと寂しいニャ😿'
-                ];
+                 if (hour >= 5 && hour < 11) {
+                     messages = ['おはようニャ！今日もいっぱい歩くニャ🐾', '朝ごはんは飲茶かニャ？🥟'];
+                 } else if (hour >= 11 && hour < 17) {
+                     messages = ['そっちは暑いかニャ？💦', '美味しいもの食べてるかニャ？🐟'];
+                 } else {
+                     messages = ['お土産は高級な猫缶で頼むニャ😽', '早く帰ってきていっぱい撫でてほしいニャ〜🐾'];
+                 }
             }
-            
             return messages[Math.floor(Math.random() * messages.length)];
         }
 
+        const omikujiMessages = [
+            '🎉大吉ニャ！今日は最高のエッグタルトに出会えるニャ！',
+            '💮中吉ニャ。タクシーの運転手さんが優しいかもしれないニャ',
+            '🌟小吉ニャ。歩き疲れたら無理せずエッグタルトで休むニャ🍵',
+            '😸吉ニャ。美味しい点心が食べられる予感ニャ🥟',
+            '✨大吉ニャ！写真映えする最高の景色が見れるニャ！'
+        ];
+
+        let catIsDragging = false;
+        let catLastTapTime = 0;
+        let catStartX, catStartY, catInitialLeft, catInitialBottom;
+        
         if (cat) {
-            cat.addEventListener('click', () => {
-                if(cat.classList.contains('meow')) return;
-                const msgEl = cat.querySelector('.cat-message');
-                msgEl.innerText = getCatMessage();
-                cat.classList.add('meow');
-                setTimeout(() => {
+            cat.addEventListener('touchstart', dragStart, {passive: false});
+            cat.addEventListener('mousedown', dragStart);
+
+            function dragStart(e) {
+                if (e.target.closest('.cat-message')) return; // 吹き出しを触ったときはスルー
+                if (e.type === 'touchstart') {
+                    catStartX = e.touches[0].clientX;
+                    catStartY = e.touches[0].clientY;
+                } else {
+                    catStartX = e.clientX;
+                    catStartY = e.clientY;
+                }
+                const style = window.getComputedStyle(cat);
+                catInitialLeft = parseInt(style.left, 10);
+                catInitialBottom = parseInt(style.bottom, 10);
+                
+                catIsDragging = false;
+                
+                document.addEventListener('touchmove', drag, {passive: false});
+                document.addEventListener('touchend', dragEnd);
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', dragEnd);
+            }
+
+            function drag(e) {
+                let currentX, currentY;
+                if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX;
+                    currentY = e.touches[0].clientY;
+                } else {
+                    currentX = e.clientX;
+                    currentY = e.clientY;
+                }
+                
+                const dx = currentX - catStartX;
+                const dy = currentY - catStartY;
+                
+                if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                    catIsDragging = true;
+                    // デフォルトのスクロールを防ぐ（ドラッグ中）
+                    if(e.cancelable) e.preventDefault();
+                    
+                    cat.style.left = (catInitialLeft + dx) + 'px';
+                    cat.style.bottom = (catInitialBottom - dy) + 'px'; // 下からのオフセットなので引く
+                    cat.style.transform = 'scale(0.9)'; // 持ち上げられている表現
+                }
+            }
+
+            function dragEnd(e) {
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('touchend', dragEnd);
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', dragEnd);
+                
+                cat.style.transform = ''; // スケールを元に戻す
+
+                if (!catIsDragging) {
+                    handleTap();
+                }
+            }
+            
+            function handleTap() {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - catLastTapTime;
+                
+                if (tapLength < 400 && tapLength > 0) {
+                    // Double tap
+                    triggerOmikuji();
+                } else {
+                    // Single tap
+                    const msgEl = cat.querySelector('.cat-message');
+                    msgEl.innerText = getCatMessage();
+                    cat.classList.remove('spin'); // スピンがあれば消す
                     cat.classList.remove('meow');
-                }, 2000);
-            });
+                    void cat.offsetWidth; // リフローを利用してアニメーション再発火
+                    cat.classList.add('meow');
+                    setTimeout(() => {
+                        cat.classList.remove('meow');
+                    }, 4000);
+                }
+                catLastTapTime = currentTime;
+            }
+
+            function triggerOmikuji() {
+                const msgEl = cat.querySelector('.cat-message');
+                msgEl.innerText = omikujiMessages[Math.floor(Math.random() * omikujiMessages.length)];
+                
+                cat.classList.remove('meow', 'spin');
+                void cat.offsetWidth;
+                cat.classList.add('spin', 'meow');
+                
+                setTimeout(() => {
+                    cat.classList.remove('meow', 'spin');
+                }, 5000); // 長めに読む時間を確保
+            }
         }
 
         // --- Initialization ---

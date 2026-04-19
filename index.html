@@ -166,21 +166,12 @@
             50% { transform: translateY(-4px); }
         }
 
-        /* タップした時のジャンプと反応 */
         #healing-cat.meow {
             animation: jump 0.4s ease;
-        }
-        #healing-cat.spin {
-            animation: spinCat 0.6s ease-in-out;
         }
         @keyframes jump {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-12px) scale(1.05); }
-        }
-        @keyframes spinCat {
-            0% { transform: translateY(0) rotate(0deg) scale(1); }
-            50% { transform: translateY(-20px) rotate(180deg) scale(1.1); }
-            100% { transform: translateY(0) rotate(360deg) scale(1); }
         }
 
         /* 吹き出しのスタイル */
@@ -1372,14 +1363,6 @@
             return messages[Math.floor(Math.random() * messages.length)];
         }
 
-        const omikujiMessages = [
-            '🎉大吉ニャ！今日は最高のエッグタルトに出会えるニャ！',
-            '💮中吉ニャ。タクシーの運転手さんが優しいかもしれないニャ',
-            '🌟小吉ニャ。歩き疲れたら無理せずエッグタルトで休むニャ🍵',
-            '😸吉ニャ。美味しい点心が食べられる予感ニャ🥟',
-            '✨大吉ニャ！写真映えする最高の景色が見れるニャ！'
-        ];
-
         let catIsDragging = false;
         let catLastTapTime = 0;
         let catStartX, catStartY, catInitialLeft, catInitialBottom;
@@ -1450,35 +1433,19 @@
                 const currentTime = new Date().getTime();
                 const tapLength = currentTime - catLastTapTime;
                 
-                if (tapLength < 400 && tapLength > 0) {
-                    // Double tap
-                    triggerOmikuji();
-                } else {
-                    // Single tap
-                    const msgEl = cat.querySelector('.cat-message');
-                    msgEl.innerText = getCatMessage();
-                    cat.classList.remove('spin'); // スピンがあれば消す
-                    cat.classList.remove('meow');
-                    void cat.offsetWidth; // リフローを利用してアニメーション再発火
-                    cat.classList.add('meow');
-                    setTimeout(() => {
-                        cat.classList.remove('meow');
-                    }, 4000);
-                }
-                catLastTapTime = currentTime;
-            }
-
-            function triggerOmikuji() {
+                // スマホ特有のイベント二重発生（ゴーストクリック）を防止
+                if (tapLength < 500 && tapLength > 0) return;
+                
                 const msgEl = cat.querySelector('.cat-message');
-                msgEl.innerText = omikujiMessages[Math.floor(Math.random() * omikujiMessages.length)];
-                
-                cat.classList.remove('meow', 'spin');
-                void cat.offsetWidth;
-                cat.classList.add('spin', 'meow');
-                
+                msgEl.innerText = getCatMessage();
+                cat.classList.remove('meow');
+                void cat.offsetWidth; // リフローを利用してアニメーション再発火
+                cat.classList.add('meow');
                 setTimeout(() => {
-                    cat.classList.remove('meow', 'spin');
-                }, 5000); // 長めに読む時間を確保
+                    cat.classList.remove('meow');
+                }, 4000);
+                
+                catLastTapTime = currentTime;
             }
         }
 

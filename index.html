@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Hong Kong & Macau Trip 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -10,8 +12,10 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -22,12 +26,12 @@
                     },
                     colors: {
                         theme: {
-                            sage: '#8A9A86',       
-                            sageLight: '#EBF0EA',  
-                            ink: '#333333',        
-                            paper: '#FFFFFF',      
-                            sand: '#F7F8F7',       
-                            gold: '#C5A880'        
+                            sage: '#8A9A86',
+                            sageLight: '#EBF0EA',
+                            ink: '#333333',
+                            paper: '#FFFFFF',
+                            sand: '#F7F8F7',
+                            gold: '#C5A880'
                         }
                     }
                 }
@@ -35,16 +39,21 @@
         }
     </script>
     <style>
-        body { 
-            -webkit-tap-highlight-color: transparent; 
+        body {
+            -webkit-tap-highlight-color: transparent;
             background-color: #F7F8F7;
             color: #333333;
             padding-bottom: calc(80px + env(safe-area-inset-bottom));
         }
-        
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .hero-bg {
             background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1542223616-740d5dff7f56?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
@@ -59,6 +68,7 @@
             width: 1px;
             background: #E5E7EB;
         }
+
         .timeline-dot {
             position: absolute;
             left: -24px;
@@ -71,19 +81,26 @@
             z-index: 10;
             transition: all 0.3s ease;
         }
-        
+
         .is-now {
             border-color: #8A9A86 !important;
             background-color: #FDFDFD !important;
             box-shadow: 0 4px 20px -4px rgba(138, 154, 134, 0.2) !important;
         }
+
         .is-now .timeline-dot {
             background: #C5A880;
             box-shadow: 0 0 0 4px rgba(197, 168, 128, 0.2), 0 0 0 8px #FFFFFF;
         }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
         .map-container {
             width: 100%;
@@ -101,6 +118,7 @@
             transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
+
         .scroll-animate.is-visible {
             opacity: 1;
             transform: translateY(0);
@@ -116,6 +134,7 @@
             place-content: center;
             transition: all 0.2s ease;
         }
+
         input[type="checkbox"]::before {
             content: "";
             width: 0.65em;
@@ -127,13 +146,16 @@
             transform-origin: center;
             clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
         }
+
         input[type="checkbox"]:checked {
             background-color: #8A9A86;
             border-color: #8A9A86;
         }
+
         input[type="checkbox"]:checked::before {
             transform: scale(1);
         }
+
         .check-item.checked span {
             color: #9CA3AF;
             text-decoration: line-through;
@@ -145,12 +167,13 @@
             bottom: 95px;
             left: 10px;
             /* スマホで邪魔にならない適度なサイズ */
-            width: 100px; /* 画像が変わったので幅を少し調整しやすいように */
+            width: 100px;
+            /* 画像が変わったので幅を少し調整しやすいように */
             height: 110px;
-            background-image: url('lulu.gif'); 
+            background-image: url('lulu.gif');
             /* 【修正】ズームを解除し、画像全体をそのまま綺麗に収める設定 */
-            background-size: contain; 
-            background-position: bottom left; 
+            background-size: contain;
+            background-position: bottom left;
             background-repeat: no-repeat;
             z-index: 40;
             cursor: pointer;
@@ -158,27 +181,44 @@
             animation: breathe 4s ease-in-out infinite;
             -webkit-tap-highlight-color: transparent;
             /* 透過画像の形に沿ってフワッと影を落とす（リッチな質感） */
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
         }
-        
+
         @keyframes breathe {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
         }
 
         #healing-cat.meow {
             animation: jump 0.4s ease;
         }
+
         @keyframes jump {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.05); }
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-12px) scale(1.05);
+            }
         }
 
         /* 吹き出しのスタイル */
         .cat-message {
             position: absolute;
-            bottom: 110px; /* 猫の上部に配置 */
-            left: -5px; /* 画面左端から少し余裕を持たせて右に伸ばす */
+            bottom: 110px;
+            /* 猫の上部に配置 */
+            left: -5px;
+            /* 画面左端から少し余裕を持たせて右に伸ばす */
             transform: translateY(10px);
             background: rgba(255, 255, 255, 0.95);
             color: #8A9A86;
@@ -186,22 +226,26 @@
             border-radius: 12px;
             font-size: 11px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            white-space: nowrap; /* または max-width を指定して改行させる */
+            white-space: nowrap;
+            /* または max-width を指定して改行させる */
         }
+
         .cat-message::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 25px; /* 吹き出しの尻尾を猫の頭付近に配置 */
+            left: 25px;
+            /* 吹き出しの尻尾を猫の頭付近に配置 */
             transform: none;
             border-width: 5px 5px 0;
             border-style: solid;
             border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
         }
+
         /* 吹き出し表示時のアニメーション */
         #healing-cat.meow .cat-message {
             opacity: 1;
@@ -209,13 +253,15 @@
         }
     </style>
 </head>
+
 <body class="antialiased font-sans">
 
     <!-- Hero Section -->
     <header class="hero-bg pt-20 pb-12 px-6 relative overflow-hidden border-b border-gray-200">
         <div class="relative z-10 text-center scroll-animate is-visible">
             <p class="text-theme-ink font-serif italic text-sm mb-2 tracking-widest uppercase">4 Families Journey</p>
-            <h1 class="text-4xl font-serif text-theme-ink tracking-widest mb-3">HONG KONG <br><span class="text-3xl">& MACAU</span></h1>
+            <h1 class="text-4xl font-serif text-theme-ink tracking-widest mb-3">HONG KONG <br><span class="text-3xl">&
+                    MACAU</span></h1>
             <p class="text-theme-ink/70 text-xs font-medium tracking-[0.2em] uppercase">May 2026</p>
         </div>
     </header>
@@ -229,25 +275,14 @@
                 Travel Details
             </h2>
 
-            <!-- 写真共有 -->
-            <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 mb-8 scroll-animate">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-theme-sageLight flex items-center justify-center shrink-0 text-theme-sage">
-                        <i class="fa-solid fa-photo-film text-lg"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-theme-ink mb-1 text-sm">旅行の思い出アルバム</h3>
-                        <p class="text-[11px] text-gray-500 leading-relaxed mb-3">旅行中の写真はiCloudの共有アルバムにアップしていきます。容量を気にせず見られるので、よかったら皆さんの撮った写真もここに追加してくださいね！</p>
-                        <a href="https://www.icloud.com/sharedalbum/" target="_blank" class="inline-block bg-theme-sage text-white text-[10px] font-bold px-4 py-2 rounded-full shadow-sm hover:bg-opacity-90 transition">共有アルバムを開く <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[9px]"></i></a>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- スマート準備リスト -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 mb-8 scroll-animate">
                 <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center justify-between">
                     <span><i class="fa-solid fa-list-check text-theme-sage mr-2"></i> スマート準備リスト</span>
-                    <span class="text-[10px] text-gray-400 font-normal border border-gray-200 px-2 py-1 rounded-full">自動保存</span>
+                    <span
+                        class="text-[10px] text-gray-400 font-normal border border-gray-200 px-2 py-1 rounded-full">自動保存</span>
                 </h3>
                 <div class="space-y-3" id="checklist-container">
                     <!-- Checkboxes injected via JS -->
@@ -257,7 +292,8 @@
 
             <!-- 緊急連絡先メモ -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 mb-8 scroll-animate">
-                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-truck-medical text-theme-sage mr-2"></i> 緊急連絡先</h3>
+                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i
+                        class="fa-solid fa-truck-medical text-theme-sage mr-2"></i> 緊急連絡先</h3>
                 <div class="space-y-3 text-xs text-gray-600">
                     <div class="flex flex-col">
                         <span class="font-bold text-theme-sage mb-1">在香港日本国総領事館（事件・事故）</span>
@@ -268,64 +304,84 @@
 
             <!-- Hotels -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm mb-8 border border-gray-100 scroll-animate">
-                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-hotel text-theme-sage mr-2"></i> 宿泊先</h3>
+                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i
+                        class="fa-solid fa-hotel text-theme-sage mr-2"></i> 宿泊先</h3>
                 <div class="space-y-4">
                     <div class="border-b border-gray-100 pb-4">
                         <p class="font-bold text-theme-ink text-sm mb-1">The T Hotel</p>
-                        <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-location-dot text-theme-gold mr-1"></i>Pok Fu Lam (薄扶林)</p>
-                        <p class="text-[11px] font-bold text-theme-ink mb-2"><a href="tel:+85237177388"><i class="fa-solid fa-phone text-theme-sage mr-1"></i>+852 3717 7388</a></p>
-                        <p class="text-xs text-theme-ink bg-theme-sageLight inline-block px-3 py-1 rounded-full">中村家・野村家</p>
+                        <p class="text-xs text-gray-500 mb-2"><i
+                                class="fa-solid fa-location-dot text-theme-gold mr-1"></i>Pok Fu Lam (薄扶林)</p>
+                        <p class="text-[11px] font-bold text-theme-ink mb-2"><a href="tel:+85237177388"><i
+                                    class="fa-solid fa-phone text-theme-sage mr-1"></i>+852 3717 7388</a></p>
+                        <p class="text-xs text-theme-ink bg-theme-sageLight inline-block px-3 py-1 rounded-full">中村家・野村家
+                        </p>
                     </div>
                     <div>
                         <p class="font-bold text-theme-ink text-sm mb-1">Gateway Hotel</p>
-                        <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-location-dot text-theme-gold mr-1"></i>Tsim Sha Tsui (尖沙咀)</p>
-                        <p class="text-[11px] font-bold text-theme-ink mb-2"><a href="tel:+85221130888"><i class="fa-solid fa-phone text-theme-sage mr-1"></i>+852 2113 0888</a></p>
-                        <p class="text-xs text-theme-ink bg-theme-sageLight inline-block px-3 py-1 rounded-full">山岡家・橘家</p>
+                        <p class="text-xs text-gray-500 mb-2"><i
+                                class="fa-solid fa-location-dot text-theme-gold mr-1"></i>Tsim Sha Tsui (尖沙咀)</p>
+                        <p class="text-[11px] font-bold text-theme-ink mb-2"><a href="tel:+85221130888"><i
+                                    class="fa-solid fa-phone text-theme-sage mr-1"></i>+852 2113 0888</a></p>
+                        <p class="text-xs text-theme-ink bg-theme-sageLight inline-block px-3 py-1 rounded-full">山岡家・橘家
+                        </p>
                     </div>
                 </div>
             </div>
 
             <!-- Flights -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 scroll-animate">
-                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-plane text-theme-sage mr-2"></i> フライト</h3>
+                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i
+                        class="fa-solid fa-plane text-theme-sage mr-2"></i> フライト</h3>
                 <div class="space-y-4">
-                    
+
                     <!-- 中村家 -->
                     <div class="flex items-start">
-                        <div class="w-16 shrink-0 pt-0.5"><span class="text-[10px] font-bold text-gray-500 tracking-wider">中村家</span></div>
+                        <div class="w-16 shrink-0 pt-0.5"><span
+                                class="text-[10px] font-bold text-gray-500 tracking-wider">中村家</span></div>
                         <div class="text-xs text-gray-600 space-y-1.5 flex-grow">
-                            <p>往: UO625 (HND 6:35 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span class="text-theme-ink font-bold">10:15着</span>)</p>
-                            <p>復: UO628 (<span class="text-theme-ink font-bold">20:00発</span> <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> HND 1:20)</p>
+                            <p>往: UO625 (HND 6:35 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span
+                                    class="text-theme-ink font-bold">10:15着</span>)</p>
+                            <p>復: UO628 (<span class="text-theme-ink font-bold">20:00発</span> <i
+                                    class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> HND 1:20)</p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100"></div>
 
                     <!-- 野村家 -->
                     <div class="flex items-start">
-                        <div class="w-16 shrink-0 pt-0.5"><span class="text-[10px] font-bold text-gray-500 tracking-wider">野村家</span></div>
+                        <div class="w-16 shrink-0 pt-0.5"><span
+                                class="text-[10px] font-bold text-gray-500 tracking-wider">野村家</span></div>
                         <div class="text-xs text-gray-600 space-y-1.5 flex-grow">
-                            <p>往: CA111 (PEK 9:25 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span class="text-theme-ink font-bold">13:05着</span>)</p>
-                            <p>復: CA110 (<span class="text-theme-ink font-bold">17:45発</span> <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> PEK 21:15)</p>
+                            <p>往: CA111 (PEK 9:25 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span
+                                    class="text-theme-ink font-bold">13:05着</span>)</p>
+                            <p>復: CA110 (<span class="text-theme-ink font-bold">17:45発</span> <i
+                                    class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> PEK 21:15)</p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100"></div>
 
                     <!-- 山岡家 -->
                     <div class="flex items-start">
-                        <div class="w-16 shrink-0 pt-0.5"><span class="text-[10px] font-bold text-gray-500 tracking-wider">山岡家</span></div>
+                        <div class="w-16 shrink-0 pt-0.5"><span
+                                class="text-[10px] font-bold text-gray-500 tracking-wider">山岡家</span></div>
                         <div class="text-xs text-gray-600 space-y-1.5 flex-grow">
-                            <p>往: UO857 (NRT 8:00 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span class="text-theme-ink font-bold">11:55着</span>)</p>
-                            <p>復: UO622 (<span class="text-theme-ink font-bold">17:35発</span> <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> HND 22:55)</p>
+                            <p>往: UO857 (NRT 8:00 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span
+                                    class="text-theme-ink font-bold">11:55着</span>)</p>
+                            <p>復: UO622 (<span class="text-theme-ink font-bold">17:35発</span> <i
+                                    class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> HND 22:55)</p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100"></div>
 
                     <!-- 橘家 -->
                     <div class="flex items-start">
-                        <div class="w-16 shrink-0 pt-0.5"><span class="text-[10px] font-bold text-gray-500 tracking-wider">橘家</span></div>
+                        <div class="w-16 shrink-0 pt-0.5"><span
+                                class="text-[10px] font-bold text-gray-500 tracking-wider">橘家</span></div>
                         <div class="text-xs text-gray-600 space-y-1.5 flex-grow">
-                            <p>往: QW915 (TAO 9:25 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span class="text-theme-ink font-bold">12:45着</span>)</p>
-                            <p>復: SC4632 (<span class="text-theme-ink font-bold">5/4 17:30発</span> <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> TAO 20:35)</p>
+                            <p>往: QW915 (TAO 9:25 <i class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> <span
+                                    class="text-theme-ink font-bold">12:45着</span>)</p>
+                            <p>復: SC4632 (<span class="text-theme-ink font-bold">5/4 17:30発</span> <i
+                                    class="fa-solid fa-arrow-right mx-1 text-gray-300"></i> TAO 20:35)</p>
                         </div>
                     </div>
 
@@ -341,9 +397,10 @@
 
             <!-- 広東語語彙集 -->
             <div class="bg-theme-paper rounded-[20px] p-6 shadow-sm border border-gray-100 mb-8 scroll-animate">
-                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-language text-theme-sage mr-2"></i> 広東語語彙集</h3>
+                <h3 class="text-base font-bold text-theme-ink mb-4 flex items-center"><i
+                        class="fa-solid fa-language text-theme-sage mr-2"></i> 広東語語彙集</h3>
                 <p class="text-[11px] text-gray-500 mb-4">超基本からちょっとマニアックな単語まで網羅。</p>
-                
+
                 <h4 class="font-bold text-xs text-theme-gold mb-3 border-b border-gray-100 pb-1">普通話と共通する語彙</h4>
                 <div class="grid grid-cols-2 gap-2 mb-6">
                     <div class="bg-theme-sand p-3 rounded-xl flex flex-col justify-center">
@@ -478,22 +535,33 @@
 
             <div class="relative ml-2 pb-8 mt-8">
                 <div class="timeline-line"></div>
-                
+
                 <!-- Timeline Item -->
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T10:15:00+08:00" data-end="2026-05-02T13:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T10:15:00+08:00"
+                    data-end="2026-05-02T13:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">10:15 - 13:05</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">各家族 香港国際空港 到着</h3>
-                        <p class="text-gray-500 text-xs leading-relaxed">中村家(10:15) <i class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 山岡家(11:55) <i class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 橘家(12:45) <i class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 野村家(13:05)</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港国際空港</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                        <p class="text-gray-500 text-xs leading-relaxed">中村家(10:15) <i
+                                class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 山岡家(11:55) <i
+                                class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 橘家(12:45) <i
+                                class="fa-solid fa-angle-right text-gray-300 mx-1"></i> 野村家(13:05)</p>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港国際空港</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 香港国際空港（チェクラプコク空港）は、海を埋め立てて造られた巨大な人工島の上にあります。実はこの空港、風水に基づいて設計されており、島全体の形が「空飛ぶ龍」を模していると言われています。世界有数のハブ空港として24時間活気に満ちており、到着直後から香港の熱気を感じられるはずです！
@@ -502,13 +570,17 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T14:00:00+08:00" data-end="2026-05-02T15:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T14:00:00+08:00"
+                    data-end="2026-05-02T15:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">14:00 - 14:40</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">香港国際空港 出発</h3>
                         <p class="text-gray-500 text-xs leading-relaxed mb-3">ホテルごとのグループに分かれてタクシーで移動します🚗</p>
                         <div class="space-y-2 mb-3">
@@ -521,11 +593,15 @@
                                 <span class="text-gray-500 text-[10px]">中村・野村家</span>
                             </div>
                         </div>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港のタクシー</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港のタクシー</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 香港のタクシーは色で行き先が分かれており、赤いタクシーは香港島・九龍を含む全域を走るため、基本は「赤」に乗れば大丈夫です。日本のタクシーと違い、ドアは自動では開かないので自分で開け閉めする必要があります。また、行き先はGoogleマップの画面や漢字のメモを見せるのが一番確実でスムーズです。
@@ -534,57 +610,81 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T15:00:00+08:00" data-end="2026-05-02T16:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T15:00:00+08:00"
+                    data-end="2026-05-02T16:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">15:00 - 16:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=The+Peninsula+Hong+Kong" target="_blank" class="flex items-center">
-                                ペニンシュラ香港 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+Peninsula+Hong+Kong"
+                                target="_blank" class="flex items-center">
+                                ペニンシュラ香港 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-xs leading-relaxed">ペニンシュラ香港で印鑑作成＆お土産購入</p>
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T17:00:00+08:00" data-end="2026-05-02T17:40:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T17:00:00+08:00"
+                    data-end="2026-05-02T17:40:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">17:00 - 17:40</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Monster+Building,+Quarry+Bay,+Hong+Kong" target="_blank" class="flex items-center">
-                                モンスターマンション <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Monster+Building,+Quarry+Bay,+Hong+Kong"
+                                target="_blank" class="flex items-center">
+                                モンスターマンション <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-xs leading-relaxed">圧倒的な密集度のマンション群で映え写真を撮影📸</p>
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T18:30:00+08:00" data-end="2026-05-02T20:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T18:30:00+08:00"
+                    data-end="2026-05-02T20:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">18:30 - 20:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">予約済</div>
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">
+                            予約済</div>
                         <h3 class="text-sm font-bold mb-2 text-theme-ink mt-1">
-                            <a href="https://www.google.com/maps/search/?api=1&query=神燈海鮮酒家+香港" target="_blank" class="flex items-center">
-                                夕食：神燈海鮮酒家 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=神燈海鮮酒家+香港" target="_blank"
+                                class="flex items-center">
+                                夕食：神燈海鮮酒家 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-xs leading-relaxed">本格海鮮料理で乾杯！</p>
 
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港の食器洗い</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港の食器洗い</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 香港の伝統的なレストランや大衆食堂では、食事の前に出された熱いお茶や白湯を使って、自分でお椀や箸をすすぐ「洗杯（サイブイ）」という習慣があります。昔、屋台の衛生状態があまり良くなかった時代の名残で、今でも食前の儀式のように行われています。テーブルに置かれた大きめのボウルは、このすすいだ後のお湯を捨てるためのものです。
@@ -593,24 +693,34 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T20:30:00+08:00" data-end="2026-05-02T21:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-02T20:30:00+08:00"
+                    data-end="2026-05-02T21:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">20:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Avenue+of+Stars,+Hong+Kong" target="_blank" class="flex items-center">
-                                アベニュー・オブ・スターズ 夜景鑑賞 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Avenue+of+Stars,+Hong+Kong"
+                                target="_blank" class="flex items-center">
+                                アベニュー・オブ・スターズ 夜景鑑賞 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-xs leading-relaxed">ビクトリア・ハーバーの夜景を鑑賞後、各ホテルへ戻る</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 光のショー</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 光のショー</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 ブルース・リーの銅像で有名なアベニュー・オブ・スターズですが、夜20時からは「シンフォニー・オブ・ライツ」という光と音のショーが毎晩開催されます。ビクトリア・ハーバーを囲む40棟以上の超高層ビルから一斉にレーザー光線が放たれる光景は圧巻で、ギネス世界記録にも認定されています。
@@ -627,31 +737,42 @@
                 <p class="text-theme-gold text-[10px] font-bold tracking-widest uppercase mb-1">May 3, Fri</p>
                 <h2 class="text-3xl font-serif text-theme-ink mb-3">Macau</h2>
                 <div class="bg-theme-sand border-l-2 border-theme-sage p-3 rounded-r-lg inline-block">
-                    <p class="text-xs text-theme-ink font-medium"><i class="fa-solid fa-car-side mr-1 text-theme-sage"></i> マカオでの移動は9人乗りの車をチャーターしています</p>
+                    <p class="text-xs text-theme-ink font-medium"><i
+                            class="fa-solid fa-car-side mr-1 text-theme-sage"></i> マカオでの移動は9人乗りの車をチャーターしています</p>
                 </div>
             </div>
-            
+
             <div id="map-day2" class="map-container scroll-animate"></div>
 
             <div class="relative ml-2 pb-8 mt-8">
                 <div class="timeline-line"></div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T07:00:00+08:00" data-end="2026-05-03T08:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T07:00:00+08:00"
+                    data-end="2026-05-03T08:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">07:00 - 07:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=恒香冰室+上環+香港" target="_blank" class="flex items-center">
-                                朝食：恒香冰室 (上環店) <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=恒香冰室+上環+香港" target="_blank"
+                                class="flex items-center">
+                                朝食：恒香冰室 (上環店) <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港の「冰室」</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港の「冰室」</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 冰室（ビンサッ）とは、直訳すると「氷の部屋」。元々は冷たい飲み物やアイスなどを提供する喫茶店として誕生しました。絶対に食べておきたいのは、サクサクのクッキー生地に厚切りバターを豪快に挟んだ「菠蘿油（パイナップルパン）」。罪悪感を感じるほどの美味しさですよ！
@@ -660,20 +781,28 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T08:30:00+08:00" data-end="2026-05-03T09:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T08:30:00+08:00"
+                    data-end="2026-05-03T09:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">08:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">フェリーターミナル 出発</h3>
                         <p class="text-[11px] text-gray-500 leading-relaxed">Klook手配済。座席が離れても休息タイムとしてリラックスを。</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: マカオ行きのフェリー</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: マカオ行きのフェリー</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 香港からマカオへのフェリーは主に2種類あり、私たちが乗る「ターボジェット（赤い船）」は最高時速約80kmという海の上の新幹線です！船体が海面から少し浮き上がって進むため、揺れが少なく船酔いしにくいのが特徴です。約1時間の船旅ですが、エアコンがかなり強めに効いているので羽織ものは必須アイテムになります。
@@ -682,46 +811,69 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T09:30:00+08:00" data-end="2026-05-03T10:15:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T09:30:00+08:00"
+                    data-end="2026-05-03T10:15:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">09:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold text-theme-ink">マカオ到着・入国手続き</h3>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 入国スタンプ</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 入国スタンプ</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
-                                マカオに入国する際、パスポートにスタンプは押されません。代わりに、名前や滞在期限が印字された小さな紙きれ（到着申報表／Arrival Card）がポンと手渡されます。一見ただのレシートのようですが、これが入国を証明する大切な書類になります。ホテルへのチェックイン時などに提示を求められることがあるので、なくさないようにパスポートにしっかりと挟んで保管しておきましょう！
+                                マカオに入国する際、パスポートにスタンプは押されません。代わりに、名前や滞在期限が印字された小さな紙きれ（到着申報表／Arrival
+                                Card）がポンと手渡されます。一見ただのレシートのようですが、これが入国を証明する大切な書類になります。ホテルへのチェックイン時などに提示を求められることがあるので、なくさないようにパスポートにしっかりと挟んで保管しておきましょう！
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T10:15:00+08:00" data-end="2026-05-03T11:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T10:15:00+08:00"
+                    data-end="2026-05-03T11:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">10:15 - 11:05</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-3 text-theme-ink">世界遺産エリア 観光</h3>
                         <div class="flex flex-col gap-2 mb-3">
-                            <a href="https://www.google.com/maps/search/?api=1&query=St.+Dominic's+Church,+Macau" target="_blank" class="flex items-center text-xs text-gray-600"><i class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 聖ドミニコ教会</a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Portuguese+Bookshop,+Macau" target="_blank" class="flex items-center text-xs text-gray-600"><i class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 葡文本局</a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Ruins+of+St.+Paul's,+Macau" target="_blank" class="flex items-center text-xs text-gray-600"><i class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 聖ポール天主堂跡</a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=St.+Dominic's+Church,+Macau"
+                                target="_blank" class="flex items-center text-xs text-gray-600"><i
+                                    class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 聖ドミニコ教会</a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Portuguese+Bookshop,+Macau"
+                                target="_blank" class="flex items-center text-xs text-gray-600"><i
+                                    class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 葡文本局</a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Ruins+of+St.+Paul's,+Macau"
+                                target="_blank" class="flex items-center text-xs text-gray-600"><i
+                                    class="fa-solid fa-location-dot w-4 text-theme-gold"></i> 聖ポール天主堂跡</a>
                         </div>
                         <p class="text-[10px] text-gray-400">※11:05に聖ポール天主堂跡に集合として、各自ブロック単位で自由に散策するのがおすすめです。</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 聖ポール天主堂跡</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 聖ポール天主堂跡</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 かつてアジア最大のカトリック教会でしたが、1835年の火災で正面の壁（ファサード）と階段だけが焼け残りました。壁の彫刻をよく観察すると、聖母マリアの隣に「漢字」が刻まれていたり、中国の伝統的な「獅子」が描かれていたりします。長崎から追放された日本人キリシタンも建設に関わった、東西文化ミックスの傑作です。
@@ -730,25 +882,37 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T11:30:00+08:00" data-end="2026-05-03T13:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T11:30:00+08:00"
+                    data-end="2026-05-03T13:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">11:30 - 13:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">予約済</div>
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">
+                            予約済</div>
                         <h3 class="text-sm font-bold mb-1 mt-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=葡景轩+Alma+Macau" target="_blank" class="flex items-center">
-                                昼食：葡景轩 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=葡景轩+Alma+Macau" target="_blank"
+                                class="flex items-center">
+                                昼食：葡景轩 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-[11px]">正宗葡国菜（ポルトガル料理）を堪能🍷</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: マカエンセ料理</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: マカエンセ料理</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 マカオ料理（マカエンセ料理）は、大航海時代にポルトガル人が持ち込んだレシピをベースに、寄港地だったアフリカやインド、東南アジア、そして現地の中国のスパイスが複雑に絡み合って生まれた「世界最古のフュージョン料理」です。ココナッツミルクやカレー粉、オリーブオイルがひとつの鍋で出会う奇跡の味わいが楽しめます。
@@ -757,23 +921,37 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T13:15:00+08:00" data-end="2026-05-03T13:45:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T13:15:00+08:00"
+                    data-end="2026-05-03T13:45:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">13:15 - 13:45</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-4 text-theme-ink">お土産ショッピング</h3>
                         <div class="flex flex-col gap-3">
-                            <a href="https://www.google.com/maps/search/?api=1&query=澳門英記餅家" target="_blank" class="flex items-center text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-xl"><i class="fa-solid fa-cookie text-theme-gold mr-3"></i> 英記餅家（スヌーピー） <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-gray-300"></i></a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=MinM+plaza+澳品薈" target="_blank" class="flex items-center text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-xl"><i class="fa-solid fa-bag-shopping text-theme-gold mr-3"></i> MinM plaza澳品薈 <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-gray-300"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=澳門英記餅家" target="_blank"
+                                class="flex items-center text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-xl"><i
+                                    class="fa-solid fa-cookie text-theme-gold mr-3"></i> 英記餅家（スヌーピー） <i
+                                    class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-gray-300"></i></a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=MinM+plaza+澳品薈" target="_blank"
+                                class="flex items-center text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-xl"><i
+                                    class="fa-solid fa-bag-shopping text-theme-gold mr-3"></i> MinM plaza澳品薈 <i
+                                    class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-gray-300"></i></a>
                         </div>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: アーモンドクッキー</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: アーモンドクッキー</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 マカオの定番土産「杏仁餅（アーモンドクッキー）」は、クッキーというより「落雁」や「ちんすこう」に近い、口の中でホロホロと崩れる独特の食感が特徴です。緑豆の粉とアーモンド、砂糖などを木型に入れて押し固め、炭火でじっくり焼き上げて作られます。お茶請けにぴったりですよ。
@@ -782,24 +960,34 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T14:05:00+08:00" data-end="2026-05-03T16:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T14:05:00+08:00"
+                    data-end="2026-05-03T16:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">14:05 - 16:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=The+Venetian+Macao" target="_blank" class="flex items-center">
-                                ザ・ベネチアン・マカオ <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+Venetian+Macao" target="_blank"
+                                class="flex items-center">
+                                ザ・ベネチアン・マカオ <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-[11px] leading-relaxed">コタイ地区へ移動。カジノ、運河エリアなどを散策。</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 世界最大のカジノ</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 世界最大のカジノ</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 ザ・ベネチアン・マカオは、東京ドームの約1.5倍という桁外れの面積を誇る世界最大級のリゾートです。建物の中に一歩足を踏み入れると、そこは永遠に夕暮れの青空が広がる不思議な空間。運河には本物の水が流れ、イタリア人のゴンドリエーレがカンツォーネを歌いながらゴンドラを漕いでくれます。
@@ -808,24 +996,34 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T16:05:00+08:00" data-end="2026-05-03T16:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T16:05:00+08:00"
+                    data-end="2026-05-03T16:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">16:05</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=The+Parisian+Macao" target="_blank" class="flex items-center">
-                                ザ・パリジャン・マカオ <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+Parisian+Macao" target="_blank"
+                                class="flex items-center">
+                                ザ・パリジャン・マカオ <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-[11px] leading-relaxed">エッフェル塔をバックに記念撮影🗼</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: エッフェル塔の大きさ</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: エッフェル塔の大きさ</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 ザ・パリジャン・マカオのシンボルであるこのエッフェル塔は、パリにある本物のエッフェル塔のちょうど半分（1/2スケール）、高さ約162メートルで精巧に再現されています。鉄骨の組み方までオリジナルを忠実に再現しているこだわりっぷりです。
@@ -834,24 +1032,34 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T16:30:00+08:00" data-end="2026-05-03T17:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T16:30:00+08:00"
+                    data-end="2026-05-03T17:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">16:30 - 17:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Taipa+Village,+Macau" target="_blank" class="flex items-center">
-                                タイパ・ヴィレッジ 散策 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Taipa+Village,+Macau"
+                                target="_blank" class="flex items-center">
+                                タイパ・ヴィレッジ 散策 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-400 text-[10px] leading-relaxed">※夕方は道が混むため、17:15頃には夕食の半島側へ戻る動きを始めましょう。</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: タイパの街並み</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: タイパの街並み</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 「タイパ・ヴィレッジ」は、きらびやかな大型カジノリゾートから一歩足を踏み入れると現れる、ノスタルジックなエリアです。パステルカラーのコロニアル建築や石畳の路地がそのまま残されており、まるで南ヨーロッパの小さな村に迷い込んだかのような気分を味わえます。
@@ -860,24 +1068,36 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T18:00:00+08:00" data-end="2026-05-03T19:50:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T18:00:00+08:00"
+                    data-end="2026-05-03T19:50:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">18:00 - 19:50</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">予約済</div>
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 bg-theme-gold text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">
+                            予約済</div>
                         <h3 class="text-sm font-bold mb-1 mt-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Vic's+Restaurante,+Macau" target="_blank" class="flex items-center">
-                                夕食：Vic’s Restaurante <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Vic's+Restaurante,+Macau"
+                                target="_blank" class="flex items-center">
+                                夕食：Vic’s Restaurante <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: フィッシャーマンズ・ワーフ</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: フィッシャーマンズ・ワーフ</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 お店があるマカオ・フィッシャーマンズ・ワーフは、マカオ最大のテーマパーク型施設です。広大な敷地内には、古代ローマのコロッセオを模した巨大な建造物や、ヨーロッパの港町を再現したカラフルなストリートがあり、どこを切り取っても写真映え抜群です！
@@ -886,19 +1106,28 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T21:00:00+08:00" data-end="2026-05-03T22:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-03T21:00:00+08:00"
+                    data-end="2026-05-03T22:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">21:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
-                        <h3 class="text-sm font-bold text-theme-ink">マカオ発 <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> 22:00 香港着</h3>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: フェリーからの夜景</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                        <h3 class="text-sm font-bold text-theme-ink">マカオ発 <i
+                                class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> 22:00 香港着</h3>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: フェリーからの夜景</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 マカオから香港へ戻る夜のフェリーは、出港直後はマカオのカジノのネオンが海面に反射するきらびやかな景色を堪能できます。そして1時間後、香港に近づくと今度は100万ドルの夜景を誇るビクトリア・ハーバーの光の海が出迎えてくれます。
@@ -921,23 +1150,33 @@
             <div class="relative ml-2 pb-8 mt-8">
                 <div class="timeline-line"></div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-04T07:00:00+08:00" data-end="2026-05-04T08:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-04T07:00:00+08:00"
+                    data-end="2026-05-04T08:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">07:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=得闲饮茶+Let's+Yum+Cha+Sham+Shui+Po" target="_blank" class="flex items-center">
-                                朝食：得闲饮茶 (深水埗) <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=得闲饮茶+Let's+Yum+Cha+Sham+Shui+Po"
+                                target="_blank" class="flex items-center">
+                                朝食：得闲饮茶 (深水埗) <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港の「飲茶」</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港の「飲茶」</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 「飲茶（ヤムチャ）」は、単に点心を食べるだけでなく「お茶を飲みながら家族や友人と団らんを楽しむ」という香港の奥深い伝統文化です。誰かがお茶を注いでくれた時、テーブルを指の関節でトントンと軽く叩くのは、土下座の代わりに指を曲げて感謝を示したのが始まりと言われる、香港ならではのスマートな合図です！
@@ -946,21 +1185,28 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-04T09:00:00+08:00" data-end="2026-05-04T21:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-04T09:00:00+08:00"
+                    data-end="2026-05-04T21:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">09:00 - 21:00</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-3 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Hong+Kong+Disneyland" target="_blank" class="flex items-center">
-                                香港ディズニーランド <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hong+Kong+Disneyland"
+                                target="_blank" class="flex items-center">
+                                香港ディズニーランド <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
-                        
+
                         <div class="bg-theme-sand border-l-2 border-theme-gold p-3 rounded-r-lg mb-3">
-                            <p class="text-xs text-theme-ink font-medium">14:30〜15:00頃 橘家の皆様はお別れ👋 <span class="text-gray-500 text-[10px] font-normal">(17:30発 SC4632便)</span></p>
+                            <p class="text-xs text-theme-ink font-medium">14:30〜15:00頃 橘家の皆様はお別れ👋 <span
+                                    class="text-gray-500 text-[10px] font-normal">(17:30発 SC4632便)</span></p>
                         </div>
                     </div>
                 </div>
@@ -968,15 +1214,22 @@
 
             <!-- 香港ディズニーランド 見どころ・攻略ガイド -->
             <div class="mt-8 mb-4 scroll-animate">
-                <h3 class="text-xl font-serif font-bold text-theme-ink mb-4 flex items-center"><i class="fa-solid fa-star text-theme-gold mr-2"></i> 香港ディズニーランド 必見ガイド</h3>
+                <h3 class="text-xl font-serif font-bold text-theme-ink mb-4 flex items-center"><i
+                        class="fa-solid fa-star text-theme-gold mr-2"></i> 香港ディズニーランド 必見ガイド</h3>
                 <div class="space-y-4">
                     <!-- アトラクション -->
                     <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100">
                         <h4 class="font-bold text-theme-ink mb-3 text-sm">🎢 日本にはない！限定アトラクション</h4>
                         <ul class="text-xs text-gray-600 space-y-3">
-                            <li><span class="font-bold text-theme-sage">ミスティック・マナー</span><br>世界でここだけ！ホーンテッドマンションの香港版とも言えますが、幽霊は出ません。最新プロジェクションマッピングと自走式ライドが融合した最高傑作です。</li>
-                            <li><span class="font-bold text-theme-sage">アイアンマン・エクスペリエンス</span><br>マーベル好き必見！アイアンマンと一緒に香港の街の上空を飛び回る大迫力の3Dライド。</li>
-                            <li><span class="font-bold text-theme-sage">ビッグ・グリズリー・マウンテン</span><br>途中で逆走するスリル満点のコースター。ビッグサンダーマウンテンより激しめで大人も楽しめます！</li>
+                            <li><span
+                                    class="font-bold text-theme-sage">ミスティック・マナー</span><br>世界でここだけ！ホーンテッドマンションの香港版とも言えますが、幽霊は出ません。最新プロジェクションマッピングと自走式ライドが融合した最高傑作です。
+                            </li>
+                            <li><span
+                                    class="font-bold text-theme-sage">アイアンマン・エクスペリエンス</span><br>マーベル好き必見！アイアンマンと一緒に香港の街の上空を飛び回る大迫力の3Dライド。
+                            </li>
+                            <li><span
+                                    class="font-bold text-theme-sage">ビッグ・グリズリー・マウンテン</span><br>途中で逆走するスリル満点のコースター。ビッグサンダーマウンテンより激しめで大人も楽しめます！
+                            </li>
                         </ul>
                     </div>
                     <!-- アナ雪エリア -->
@@ -1010,23 +1263,33 @@
             <div class="relative ml-2 pb-8 mt-8">
                 <div class="timeline-line"></div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T08:30:00+08:00" data-end="2026-05-05T09:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T08:30:00+08:00"
+                    data-end="2026-05-05T09:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">08:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-1 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Lan+Fong+Yuen+Central" target="_blank" class="flex items-center">
-                                朝食：蘭芳園 (中環老店) <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Lan+Fong+Yuen+Central"
+                                target="_blank" class="flex items-center">
+                                朝食：蘭芳園 (中環老店) <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: シルキーミルクティー</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: シルキーミルクティー</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 蘭芳園（ランフォンユン）は、濃厚な紅茶をエバミルクで割った「絲襪奶茶（シルキーミルクティー）」の発祥の地として知られる超有名店です。ストッキングのように細長い特製の布袋で何度も何度も茶葉を濾すことで、渋みを抑えつつ究極になめらかで絹のような口当たりのミルクティーが生み出されます。
@@ -1035,55 +1298,76 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T09:30:00+08:00" data-end="2026-05-05T12:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T09:30:00+08:00"
+                    data-end="2026-05-05T12:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">09:30 - 11:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-4 text-theme-ink">チーム分割ミッション</h3>
                         <div class="space-y-3">
                             <div class="bg-theme-sand p-4 rounded-xl">
-                                <h4 class="font-bold text-xs mb-1 text-theme-ink"><i class="fa-brands fa-apple mr-1"></i> iPhone購入チーム</h4>
+                                <h4 class="font-bold text-xs mb-1 text-theme-ink"><i
+                                        class="fa-brands fa-apple mr-1"></i> iPhone購入チーム</h4>
                                 <p class="text-[10px] text-gray-500">中村家・野村家 (Apple Store IFC)</p>
                             </div>
                             <div class="bg-theme-sand p-4 rounded-xl">
-                                <h4 class="font-bold text-xs mb-1 text-theme-ink"><i class="fa-solid fa-building-columns mr-1"></i> 銀行解約チーム</h4>
+                                <h4 class="font-bold text-xs mb-1 text-theme-ink"><i
+                                        class="fa-solid fa-building-columns mr-1"></i> 銀行解約チーム</h4>
                                 <p class="text-[10px] text-gray-500">山岡家</p>
                             </div>
                         </div>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港のiPhone事情</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港のiPhone事情</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
-                                香港には消費税（付加価値税）が存在しないため、iPhoneなどのApple製品が日本より少しお得に購入できるケースがあります。さらに最大の魅力は、香港版のiPhoneはマナーモードにするとカメラのシャッター音が全く鳴らないこと！なお、以前は物理SIMが2枚入る仕様でしたが、最新のiPhone 17シリーズからは物理SIM1枚＋eSIMの組み合わせに変更されています。静かなレストランでの食事風景を撮る際にとても重宝するため、わざわざ香港で買い替える日本人も多いんです。
+                                香港には消費税（付加価値税）が存在しないため、iPhoneなどのApple製品が日本より少しお得に購入できるケースがあります。さらに最大の魅力は、香港版のiPhoneはマナーモードにするとカメラのシャッター音が全く鳴らないこと！なお、以前は物理SIMが2枚入る仕様でしたが、最新のiPhone
+                                17シリーズからは物理SIM1枚＋eSIMの組み合わせに変更されています。静かなレストランでの食事風景を撮る際にとても重宝するため、わざわざ香港で買い替える日本人も多いんです。
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T12:30:00+08:00" data-end="2026-05-05T14:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T12:30:00+08:00"
+                    data-end="2026-05-05T14:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">12:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Central" target="_blank" class="flex items-center">
-                                昼食：九記牛腩 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Central"
+                                target="_blank" class="flex items-center">
+                                昼食：九記牛腩 <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 ml-2"></i>
                             </a>
                         </h3>
                         <p class="text-gray-500 text-[11px] mb-3 leading-relaxed">席が狭いため、2〜3名ずつに分かれて座るのがスムーズです🍜</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港の「相席」文化</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港の「相席」文化</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 九記牛腩（カウキー）は、牛バラ肉を漢方スープで何時間も煮込んだ麺が「香港一」と称されるミシュラン掲載の超人気店です！香港のローカル食堂では見知らぬ人と同じテーブルに座る「搭檯（ダップトイ）」がごく当たり前の文化。混雑時は、相席同士で肩を並べて麺をすすることになります。これも活気あふれる香港の醍醐味の一つとして楽しんでみてください！
@@ -1092,55 +1376,82 @@
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T14:00:00+08:00" data-end="2026-05-05T15:30:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T14:00:00+08:00"
+                    data-end="2026-05-05T15:30:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">14:00 - 15:30</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-2 text-theme-ink">ホテルへ戻り荷物ピックアップ 🧳</h3>
-                        <p class="text-[11px] text-gray-500 leading-relaxed">昼食後、中環からそれぞれのホテル（T Hotel, Gateway）へ戻り、預けていた荷物を受け取って空港へ向かいます。</p>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 荷物預かり</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                        <p class="text-[11px] text-gray-500 leading-relaxed">昼食後、中環からそれぞれのホテル（T Hotel,
+                            Gateway）へ戻り、預けていた荷物を受け取って空港へ向かいます。</p>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 荷物預かり</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
-                                香港のホテルはホスピタリティが高く、チェックアウトした後でも快くスーツケースなどの荷物を預かってくれます。「Keep my luggage, please」と伝えればOKです。引換券（タグ）を渡されるので、それを持って身軽に最終日の観光やショッピングに出かけましょう。少しのチップ（10〜20HKD）を渡すとスマートです。
+                                香港のホテルはホスピタリティが高く、チェックアウトした後でも快くスーツケースなどの荷物を預かってくれます。「Keep my luggage,
+                                please」と伝えればOKです。引換券（タグ）を渡されるので、それを持って身軽に最終日の観光やショッピングに出かけましょう。少しのチップ（10〜20HKD）を渡すとスマートです。
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T15:30:00+08:00" data-end="2026-05-05T21:00:00+08:00">
+                <div class="timeline-item relative pl-8 mb-8 scroll-animate" data-start="2026-05-05T15:30:00+08:00"
+                    data-end="2026-05-05T21:00:00+08:00">
                     <div class="timeline-dot"></div>
                     <div class="flex items-center gap-2 mb-2">
                         <div class="text-xs font-medium text-gray-500 font-serif tracking-wide">15:30 以降</div>
-                        <div class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">📍 NOW</div>
+                        <div
+                            class="now-badge hidden bg-theme-sage text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                            📍 NOW</div>
                     </div>
-                    <div class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
+                    <div
+                        class="bg-theme-paper p-5 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300">
                         <h3 class="text-sm font-bold mb-3 text-theme-ink">空港へ出発 ✈️</h3>
                         <div class="space-y-2">
                             <div class="flex items-center justify-between text-xs py-2 border-b border-gray-50">
-                                <div class="flex items-center"><span class="font-bold mr-2 text-gray-600">山岡家</span><span class="text-gray-400">Gateway発</span></div>
-                                <div class="font-medium text-right"><span class="text-gray-400 text-[10px] mr-1">UO622</span>17:35 飛</div>
+                                <div class="flex items-center"><span
+                                        class="font-bold mr-2 text-gray-600">山岡家</span><span
+                                        class="text-gray-400">Gateway発</span></div>
+                                <div class="font-medium text-right"><span
+                                        class="text-gray-400 text-[10px] mr-1">UO622</span>17:35 飛</div>
                             </div>
                             <div class="flex items-center justify-between text-xs py-2 border-b border-gray-50">
-                                <div class="flex items-center"><span class="font-bold mr-2 text-gray-600">野村家</span><span class="text-gray-400">T Hotel発</span></div>
-                                <div class="font-medium text-right"><span class="text-gray-400 text-[10px] mr-1">CA110</span>17:45 飛</div>
+                                <div class="flex items-center"><span
+                                        class="font-bold mr-2 text-gray-600">野村家</span><span class="text-gray-400">T
+                                        Hotel発</span></div>
+                                <div class="font-medium text-right"><span
+                                        class="text-gray-400 text-[10px] mr-1">CA110</span>17:45 飛</div>
                             </div>
                             <div class="flex items-center justify-between text-xs py-2">
-                                <div class="flex items-center"><span class="font-bold mr-2 text-gray-600">中村家</span><span class="text-gray-400">T Hotel発</span></div>
-                                <div class="font-medium text-right"><span class="text-gray-400 text-[10px] mr-1">UO628</span>20:00 飛</div>
+                                <div class="flex items-center"><span
+                                        class="font-bold mr-2 text-gray-600">中村家</span><span class="text-gray-400">T
+                                        Hotel発</span></div>
+                                <div class="font-medium text-right"><span
+                                        class="text-gray-400 text-[10px] mr-1">UO628</span>20:00 飛</div>
                             </div>
                         </div>
-                        
-                        <details class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
-                            <summary class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
-                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i> 豆知識: 香港国際空港の広さ</span>
-                                <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+                        <details
+                            class="group mt-4 bg-theme-sand rounded-xl p-3 cursor-pointer outline-none transition-all">
+                            <summary
+                                class="font-medium text-[11px] text-theme-sage flex justify-between items-center outline-none list-none [&::-webkit-details-marker]:hidden">
+                                <span class="flex items-center"><i class="fa-solid fa-lightbulb mr-2 opacity-70"></i>
+                                    豆知識: 香港国際空港の広さ</span>
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
                             </summary>
                             <div class="text-[11px] text-gray-500 mt-2 pt-2 border-t border-gray-200 leading-relaxed">
                                 香港国際空港は想像以上に巨大です！出国審査を終えた後でも、自分の搭乗ゲートが遠い場合は、ターミナル内を走る専用の地下鉄（シャトルトレイン）に乗って移動する必要があります。搭乗口までたどり着くのに20〜30分かかることも珍しくありません。ただ、高級ブランドから香港土産の定番店、さらにはディズニー・ストアまでお買い物の誘惑が尽きない場所なので、少し早めに到着して空港内を散策するのがおすすめです。
@@ -1153,10 +1464,7 @@
 
     </main>
 
-    <!-- Floating Action Button for Photo Sharing -->
-    <a href="https://www.icloud.com/sharedalbum/" target="_blank" class="fixed bottom-[85px] right-5 bg-white text-theme-sage w-12 h-12 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center z-40 transition-transform active:scale-95 border border-gray-100" title="写真アルバムを開く">
-        <i class="fa-solid fa-camera-retro text-lg"></i>
-    </a>
+
 
     <!-- Healing Cat -->
     <div id="healing-cat">
@@ -1164,29 +1472,36 @@
     </div>
 
     <!-- Bottom Navigation (App-like) -->
-    <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur-lg border-t border-gray-100 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
+    <nav
+        class="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur-lg border-t border-gray-100 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
         <div class="flex justify-around items-center px-1 py-2">
-            <button onclick="switchTab('info')" id="nav-info" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-theme-sage transition-colors">
+            <button onclick="switchTab('info')" id="nav-info"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-theme-sage transition-colors">
                 <i class="fa-solid fa-suitcase text-[18px]"></i>
                 <span class="text-[9px] font-bold tracking-wider">INFO</span>
             </button>
-            <button onclick="switchTab('words')" id="nav-words" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
+            <button onclick="switchTab('words')" id="nav-words"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
                 <i class="fa-solid fa-language text-[18px]"></i>
                 <span class="text-[9px] font-bold tracking-wider">WORDS</span>
             </button>
-            <button onclick="switchTab('day1')" id="nav-day1" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
+            <button onclick="switchTab('day1')" id="nav-day1"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
                 <span class="text-[14px] font-serif font-bold">1</span>
                 <span class="text-[9px] font-bold tracking-wider">DAY</span>
             </button>
-            <button onclick="switchTab('day2')" id="nav-day2" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
+            <button onclick="switchTab('day2')" id="nav-day2"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
                 <span class="text-[14px] font-serif font-bold">2</span>
                 <span class="text-[9px] font-bold tracking-wider">DAY</span>
             </button>
-            <button onclick="switchTab('day3')" id="nav-day3" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
+            <button onclick="switchTab('day3')" id="nav-day3"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
                 <span class="text-[14px] font-serif font-bold">3</span>
                 <span class="text-[9px] font-bold tracking-wider">DAY</span>
             </button>
-            <button onclick="switchTab('day4')" id="nav-day4" class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
+            <button onclick="switchTab('day4')" id="nav-day4"
+                class="nav-btn flex flex-col items-center gap-1 p-1 w-14 text-gray-300 transition-colors">
                 <span class="text-[14px] font-serif font-bold">4</span>
                 <span class="text-[9px] font-bold tracking-wider">DAY</span>
             </button>
@@ -1201,14 +1516,14 @@
                 el.classList.remove('text-theme-sage');
                 el.classList.add('text-gray-300');
             });
-            
+
             const activeTab = document.getElementById(tabId);
             activeTab.classList.add('active');
-            
+
             const activeBtn = document.getElementById('nav-' + tabId);
             activeBtn.classList.remove('text-gray-300');
             activeBtn.classList.add('text-theme-sage');
-            
+
             window.scrollTo({ top: 0, behavior: 'instant' });
 
             if (tabId.startsWith('day')) {
@@ -1227,12 +1542,12 @@
         let observer;
         const setupObserver = () => {
             if (observer) observer.disconnect();
-            
+
             observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); 
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
@@ -1262,7 +1577,7 @@
             checklistItems.forEach(item => {
                 const isChecked = localStorage.getItem(item.id) === 'true';
                 const wrapperClass = isChecked ? 'check-item checked flex items-center gap-3' : 'check-item flex items-center gap-3';
-                
+
                 const html = `
                     <label class="${wrapperClass}" data-id="${item.id}">
                         <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
@@ -1316,11 +1631,13 @@
                 { lat: 22.3080, lng: 113.9185, title: "香港国際空港" },
                 { lat: 22.2536, lng: 114.1311, title: "The T Hotel" },
                 { lat: 22.2988, lng: 114.1685, title: "Gateway Hotel" },
-                { lat: 22.2929, lng: 114.1743, title: "アベニュー・オブ・スターズ" },
-                { lat: 22.3057, lng: 114.1706, title: "神燈海鮮酒家" }
+                { lat: 22.2951, lng: 114.1718, title: "ペニンシュラ香港" },
+                { lat: 22.2841, lng: 114.2123, title: "モンスターマンション" },
+                { lat: 22.3057, lng: 114.1706, title: "神燈海鮮酒家" },
+                { lat: 22.2929, lng: 114.1743, title: "アベニュー・オブ・スターズ" }
             ],
             day2: [
-                { lat: 22.2882, lng: 114.1517, title: "香港マカフェリーターミナル" },
+                { lat: 22.2882, lng: 114.1517, title: "香港マカオフェリーターミナル" },
                 { lat: 22.1970, lng: 113.5558, title: "外港フェリーターミナル" },
                 { lat: 22.1939, lng: 113.5407, title: "聖ドミニコ教会" },
                 { lat: 22.1934, lng: 113.5398, title: "葡文本局" },
@@ -1351,7 +1668,7 @@
             const container = document.getElementById(mapId);
             if (!container) return;
 
-            const map = L.map(mapId, { zoomControl: false }); 
+            const map = L.map(mapId, { zoomControl: false });
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; CARTO'
             }).addTo(map);
@@ -1397,13 +1714,13 @@
                     'たくさん写真撮ってお土産話きかせてニャ😽'
                 ];
             } else {
-                 if (hour >= 5 && hour < 11) {
-                     messages = ['おはようニャ！今日もいっぱい歩くニャ🐾', '朝ごはんは飲茶かニャ？🥟'];
-                 } else if (hour >= 11 && hour < 17) {
-                     messages = ['そっちは暑いかニャ？💦', '美味しいもの食べてるかニャ？🐟'];
-                 } else {
-                     messages = ['お土産は高級な猫缶で頼むニャ😽', '早く帰ってきていっぱい撫でてほしいニャ〜🐾'];
-                 }
+                if (hour >= 5 && hour < 11) {
+                    messages = ['おはようニャ！今日もいっぱい歩くニャ🐾', '朝ごはんは飲茶かニャ？🥟'];
+                } else if (hour >= 11 && hour < 17) {
+                    messages = ['そっちは暑いかニャ？💦', '美味しいもの食べてるかニャ？🐟'];
+                } else {
+                    messages = ['お土産は高級な猫缶で頼むニャ😽', '早く帰ってきていっぱい撫でてほしいニャ〜🐾'];
+                }
             }
             return messages[Math.floor(Math.random() * messages.length)];
         }
@@ -1411,9 +1728,9 @@
         let catIsDragging = false;
         let catLastTapTime = 0;
         let catStartX, catStartY, catInitialLeft, catInitialBottom;
-        
+
         if (cat) {
-            cat.addEventListener('touchstart', dragStart, {passive: false});
+            cat.addEventListener('touchstart', dragStart, { passive: false });
             cat.addEventListener('mousedown', dragStart);
 
             function dragStart(e) {
@@ -1428,10 +1745,10 @@
                 const style = window.getComputedStyle(cat);
                 catInitialLeft = parseInt(style.left, 10);
                 catInitialBottom = parseInt(style.bottom, 10);
-                
+
                 catIsDragging = false;
-                
-                document.addEventListener('touchmove', drag, {passive: false});
+
+                document.addEventListener('touchmove', drag, { passive: false });
                 document.addEventListener('touchend', dragEnd);
                 document.addEventListener('mousemove', drag);
                 document.addEventListener('mouseup', dragEnd);
@@ -1446,15 +1763,15 @@
                     currentX = e.clientX;
                     currentY = e.clientY;
                 }
-                
+
                 const dx = currentX - catStartX;
                 const dy = currentY - catStartY;
-                
+
                 if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
                     catIsDragging = true;
                     // デフォルトのスクロールを防ぐ（ドラッグ中）
-                    if(e.cancelable) e.preventDefault();
-                    
+                    if (e.cancelable) e.preventDefault();
+
                     cat.style.left = (catInitialLeft + dx) + 'px';
                     cat.style.bottom = (catInitialBottom - dy) + 'px'; // 下からのオフセットなので引く
                     cat.style.transform = 'scale(0.9)'; // 持ち上げられている表現
@@ -1466,21 +1783,21 @@
                 document.removeEventListener('touchend', dragEnd);
                 document.removeEventListener('mousemove', drag);
                 document.removeEventListener('mouseup', dragEnd);
-                
+
                 cat.style.transform = ''; // スケールを元に戻す
 
                 if (!catIsDragging) {
                     handleTap();
                 }
             }
-            
+
             function handleTap() {
                 const currentTime = new Date().getTime();
                 const tapLength = currentTime - catLastTapTime;
-                
+
                 // スマホ特有のイベント二重発生（ゴーストクリック）を防止
                 if (tapLength < 500 && tapLength > 0) return;
-                
+
                 const msgEl = cat.querySelector('.cat-message');
                 msgEl.innerText = getCatMessage();
                 cat.classList.remove('meow');
@@ -1489,7 +1806,7 @@
                 setTimeout(() => {
                     cat.classList.remove('meow');
                 }, 4000);
-                
+
                 catLastTapTime = currentTime;
             }
         }
@@ -1499,8 +1816,9 @@
             setupObserver();
             initChecklist();
             checkNowIndicator();
-            setInterval(checkNowIndicator, 60000); 
+            setInterval(checkNowIndicator, 60000);
         });
     </script>
 </body>
+
 </html>
